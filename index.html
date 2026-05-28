@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Foodroute × Melegatti — Christmas Pre-Order 2025</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<!-- Product images stored in DOM, read by JS — avoids base64-in-JS escaping issues -->
+<img id="img-p1" src="https://raw.githubusercontent.com/custodiaprojects/foodroutechristmas/main/P1.png" style="display:none" alt="" crossorigin="anonymous">
+<img id="img-p2" src="https://raw.githubusercontent.com/custodiaprojects/foodroutechristmas/main/P2.png" style="display:none" alt="" crossorigin="anonymous">
+<img id="img-p3" src="https://raw.githubusercontent.com/custodiaprojects/foodroutechristmas/main/P3.png" style="display:none" alt="" crossorigin="anonymous">
+<img id="img-p4" src="https://raw.githubusercontent.com/custodiaprojects/foodroutechristmas/main/P4.png" style="display:none" alt="" crossorigin="anonymous">
+
+<style>
+:root {
+  --crimson:  #8B1A1A;
+  --gold:     #C9952A;
+  --gold-lt:  #E8B84B;
+  --gold-pale:#F5E6C3;
+  --cream:    #FBF6EE;
+  --cream-dk: #F0E6D0;
+  --forest:   #2C4A2E;
+  --ink:      #1A1208;
+  --ink-60:   rgba(26,18,8,0.58);
+  --ink-15:   rgba(26,18,8,0.12);
+  --serif: 'Cormorant Garamond', Georgia, serif;
+  --sans:  'Jost', system-ui, sans-serif;
+  --rad: 14px;
+  --shadow: 0 4px 24px rgba(26,18,8,0.10);
+  --shadow-lg: 0 12px 48px rgba(26,18,8,0.16);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--cream);
+  font-family: var(--sans);
+  color: var(--ink);
+  font-size: 15px;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+button { cursor: pointer; border: none; background: none; font-family: inherit; }
+input, textarea { font-family: inherit; }
+a { color: inherit; }
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 3px; }
+
+/* HEADER */
+header {
+  background: var(--crimson);
+  padding: 0 24px; height: 60px;
+  display: flex; align-items: center; justify-content: space-between;
+  position: sticky; top: 0; z-index: 100;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.3);
+}
+.logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--gold-pale); }
+.logo-mark {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--gold) 0%, #7A4A10 100%);
+  border: 1.5px solid rgba(255,255,255,0.2);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--serif); font-size: 16px; font-weight: 600; color: white;
+}
+.logo-name { font-family: var(--serif); font-size: 18px; font-weight: 600; letter-spacing: 0.02em; }
+.header-right { display: flex; align-items: center; gap: 16px; }
+.melegatti-link {
+  font-size: 11px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--gold-pale); text-decoration: none; opacity: 0.65; transition: opacity 0.2s;
+}
+.melegatti-link:hover { opacity: 1; }
+.cart-pill {
+  display: flex; align-items: center; gap: 7px;
+  background: var(--gold); color: var(--crimson);
+  padding: 7px 16px; border-radius: 30px;
+  font-size: 12px; font-weight: 600; letter-spacing: 0.06em;
+  transition: background 0.2s, transform 0.2s; cursor: pointer;
+}
+.cart-pill:hover { background: var(--gold-lt); transform: translateY(-1px); }
+.cart-count {
+  background: var(--crimson); color: white;
+  width: 18px; height: 18px; border-radius: 50%;
+  font-size: 10px; font-weight: 700;
+  display: none; align-items: center; justify-content: center;
+}
+
+/* HERO */
+.hero {
+  background: linear-gradient(150deg, var(--crimson) 0%, #5A0A0A 55%, var(--forest) 100%);
+  color: white; padding: 52px 24px 44px;
+  text-align: center; position: relative; overflow: hidden;
+}
+.hero::after {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse 70% 50% at 50% 110%, rgba(201,149,42,0.2) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-tag {
+  display: inline-block;
+  font-size: 10px; font-weight: 600; letter-spacing: 0.24em; text-transform: uppercase;
+  color: var(--gold); background: rgba(201,149,42,0.12);
+  border: 1px solid rgba(201,149,42,0.3);
+  padding: 5px 16px; border-radius: 20px; margin-bottom: 18px;
+}
+.hero h1 {
+  font-family: var(--serif); font-size: clamp(32px, 5vw, 58px);
+  font-weight: 400; line-height: 1.08;
+  margin-bottom: 14px; position: relative; z-index: 1;
+}
+.hero h1 em { font-style: italic; color: var(--gold-lt); }
+.hero p {
+  font-size: 14px; font-weight: 300; line-height: 1.75;
+  opacity: 0.78; max-width: 500px; margin: 0 auto 24px; position: relative; z-index: 1;
+}
+.hero-cta {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--gold); color: var(--crimson);
+  padding: 13px 28px; border-radius: 30px;
+  font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+  text-decoration: none; transition: background 0.2s, transform 0.2s; position: relative; z-index: 1;
+}
+.hero-cta:hover { background: var(--gold-lt); transform: translateY(-2px); }
+
+/* PAGE BODY */
+.page-body {
+  max-width: 900px; margin: 0 auto;
+  padding: 48px 20px 80px;
+  display: flex; flex-direction: column; gap: 48px;
+}
+
+/* SECTION HEADING */
+.section-head { display: flex; align-items: center; gap: 14px; margin-bottom: 24px; }
+.section-head h2 { font-family: var(--serif); font-size: 26px; font-weight: 600; white-space: nowrap; }
+.section-head-line { flex: 1; height: 1px; background: linear-gradient(to right, var(--gold) 0%, transparent 100%); opacity: 0.3; }
+
+/* PRODUCT ROWS */
+.product-list { display: flex; flex-direction: column; gap: 14px; }
+.product-row {
+  background: white; border-radius: var(--rad);
+  box-shadow: var(--shadow);
+  display: grid; grid-template-columns: 130px 1fr auto;
+  align-items: center; overflow: hidden;
+  transition: box-shadow 0.22s, transform 0.22s;
+  border: 1.5px solid transparent;
+}
+.product-row:hover { box-shadow: var(--shadow-lg); transform: translateY(-2px); border-color: rgba(201,149,42,0.2); }
+.product-row.has-qty { border-color: var(--gold); background: #FFFDF7; }
+
+.product-img {
+  width: 130px; height: 110px;
+  object-fit: cover; object-position: center;
+  display: block; background: #0a0a0a;
+}
+.product-info { padding: 16px 20px; min-width: 0; }
+.product-name { font-family: var(--serif); font-size: 20px; font-weight: 600; line-height: 1.2; margin-bottom: 4px; }
+.product-meta { font-size: 12px; color: var(--ink-60); letter-spacing: 0.04em; margin-bottom: 10px; }
+.product-price-row { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.price-carton { font-family: var(--serif); font-size: 22px; font-weight: 600; color: var(--crimson); }
+.price-unit { font-size: 12px; color: var(--ink-60); }
+.price-unit strong { color: var(--forest); font-weight: 600; }
+
+.product-qty-col {
+  padding: 16px 20px 16px 0;
+  display: flex; flex-direction: column; align-items: flex-end; gap: 8px;
+}
+.qty-label { font-size: 10px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-60); }
+.qty-wrap {
+  display: flex; align-items: center;
+  border: 1.5px solid var(--ink-15); border-radius: 8px;
+  overflow: hidden; background: white;
+}
+.qty-btn {
+  width: 34px; height: 38px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px; color: var(--crimson); transition: background 0.15s; flex-shrink: 0;
+}
+.qty-btn:hover { background: var(--cream); }
+.qty-input {
+  width: 42px; height: 38px; text-align: center; border: none;
+  border-left: 1.5px solid var(--ink-15); border-right: 1.5px solid var(--ink-15);
+  font-family: var(--serif); font-size: 17px; font-weight: 600; color: var(--ink);
+  -moz-appearance: textfield;
+}
+.qty-input::-webkit-inner-spin-button,
+.qty-input::-webkit-outer-spin-button { -webkit-appearance: none; }
+.qty-input:focus { outline: none; background: var(--cream); }
+.row-total {
+  font-family: var(--serif); font-size: 14px; font-weight: 600;
+  color: var(--crimson); min-height: 18px; text-align: right; white-space: nowrap;
+}
+
+/* SUMMARY BAR */
+.summary-bar {
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 200;
+  background: var(--crimson); color: white;
+  padding: 14px 24px;
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  box-shadow: 0 -4px 24px rgba(0,0,0,0.22);
+  transform: translateY(100%);
+  transition: transform 0.3s cubic-bezier(0.4,0,0.2,1);
+}
+.summary-bar.visible { transform: translateY(0); }
+.summary-bar-info { display: flex; flex-direction: column; gap: 2px; }
+.summary-bar-label { font-size: 10px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); opacity: 0.85; }
+.summary-bar-total { font-family: var(--serif); font-size: 26px; font-weight: 600; line-height: 1; }
+.summary-bar-sub { font-size: 12px; opacity: 0.65; }
+.summary-bar-btn {
+  background: var(--gold); color: var(--crimson);
+  padding: 13px 28px; border-radius: 30px;
+  font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+  transition: background 0.2s, transform 0.2s; white-space: nowrap; flex-shrink: 0;
+}
+.summary-bar-btn:hover { background: var(--gold-lt); transform: translateY(-1px); }
+
+/* DEPOSIT BLOCK */
+.deposit-block {
+  background: white; border-radius: var(--rad);
+  border: 1px solid rgba(201,149,42,0.25); padding: 24px 28px;
+  display: flex; gap: 18px; align-items: flex-start; box-shadow: var(--shadow);
+}
+.deposit-icon { font-size: 28px; flex-shrink: 0; margin-top: 2px; }
+.deposit-title { font-family: var(--serif); font-size: 18px; font-weight: 600; color: var(--crimson); margin-bottom: 6px; }
+.deposit-text { font-size: 13px; line-height: 1.75; color: var(--ink-60); }
+.deposit-text strong { color: var(--ink); }
+
+/* MODAL */
+.overlay {
+  position: fixed; inset: 0; z-index: 500;
+  background: rgba(26,18,8,0.7); backdrop-filter: blur(4px);
+  display: none; align-items: center; justify-content: center; padding: 16px;
+}
+.overlay.open { display: flex; animation: fIn 0.2s ease; }
+@keyframes fIn { from { opacity:0 } to { opacity:1 } }
+.modal {
+  background: white; border-radius: 20px;
+  width: 100%; max-width: 600px; max-height: 90vh; overflow-y: auto;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.25);
+  animation: sUp 0.28s cubic-bezier(0.4,0,0.2,1);
+}
+@keyframes sUp { from { transform: translateY(24px); opacity:0 } to { transform: translateY(0); opacity:1 } }
+.modal-top {
+  background: var(--crimson); padding: 24px 28px; color: var(--gold-pale);
+  display: flex; align-items: flex-start; justify-content: space-between;
+  position: sticky; top: 0;
+}
+.modal-top h2 { font-family: var(--serif); font-size: 24px; font-weight: 600; }
+.modal-top p { font-size: 12px; opacity: 0.65; margin-top: 4px; }
+.modal-close { font-size: 22px; opacity: 0.55; transition: opacity 0.15s; padding: 0 2px; }
+.modal-close:hover { opacity: 1; }
+.modal-body { padding: 28px; }
+.order-recap {
+  background: var(--cream); border-radius: 10px;
+  padding: 16px 18px; margin-bottom: 24px; border: 1px solid var(--ink-15);
+}
+.recap-title { font-size: 10px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+.recap-item {
+  display: flex; justify-content: space-between; align-items: baseline;
+  font-size: 13px; padding: 5px 0; border-bottom: 1px solid var(--ink-15);
+}
+.recap-item:last-of-type { border-bottom: none; }
+.recap-total {
+  display: flex; justify-content: space-between; align-items: baseline;
+  font-family: var(--serif); font-size: 20px; font-weight: 600; color: var(--crimson);
+  margin-top: 12px; padding-top: 12px; border-top: 1.5px solid rgba(201,149,42,0.4);
+}
+.form-section-label { font-size: 10px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-60); margin-bottom: 14px; }
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+.form-group { display: flex; flex-direction: column; gap: 5px; }
+.form-group.full { grid-column: 1 / -1; }
+.form-label { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-60); }
+.form-input, .form-textarea {
+  padding: 10px 13px; border: 1.5px solid var(--ink-15); border-radius: 8px;
+  font-size: 14px; color: var(--ink); background: var(--cream);
+  transition: border-color 0.18s, background 0.18s;
+}
+.form-input:focus, .form-textarea:focus { outline: none; border-color: var(--gold); background: white; }
+.form-textarea { resize: vertical; min-height: 72px; }
+.deposit-reminder {
+  background: rgba(201,149,42,0.1); border: 1px solid rgba(201,149,42,0.28);
+  border-radius: 8px; padding: 12px 14px;
+  font-size: 12.5px; line-height: 1.7; color: var(--ink-60); margin: 16px 0 20px;
+}
+.deposit-reminder strong { color: var(--gold); }
+.submit-btn {
+  width: 100%; padding: 15px;
+  background: linear-gradient(135deg, var(--crimson) 0%, #6A0E0E 100%);
+  color: white; border-radius: 10px;
+  font-size: 14px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+  box-shadow: 0 4px 18px rgba(139,26,26,0.32);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.submit-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(139,26,26,0.42); }
+
+/* SUCCESS */
+.success-top {
+  background: linear-gradient(135deg, var(--forest) 0%, #1A2E1C 100%);
+  padding: 36px 28px; text-align: center; color: var(--cream);
+}
+.success-icon { font-size: 52px; margin-bottom: 14px; }
+.success-top h2 { font-family: var(--serif); font-size: 28px; font-weight: 500; color: var(--gold-lt); margin-bottom: 8px; }
+.success-top p { font-size: 13px; opacity: 0.72; }
+.success-body { padding: 28px; }
+.summary-block {
+  background: var(--cream); border-radius: 10px; border: 1px solid var(--ink-15);
+  padding: 18px; font-family: 'Courier New', monospace; font-size: 12px;
+  line-height: 1.85; white-space: pre-wrap; margin-bottom: 20px;
+  max-height: 280px; overflow-y: auto;
+}
+.action-row { display: flex; gap: 10px; flex-wrap: wrap; }
+.act-btn {
+  flex: 1; min-width: 130px; padding: 12px 16px; border-radius: 8px;
+  font-size: 12px; font-weight: 600; letter-spacing: 0.09em; text-transform: uppercase;
+  display: flex; align-items: center; justify-content: center; gap: 7px; transition: all 0.2s;
+}
+.act-btn.red { background: var(--crimson); color: white; }
+.act-btn.red:hover { background: #A52A2A; }
+.act-btn.green { background: #25D366; color: white; }
+.act-btn.green:hover { background: #1ebe5b; }
+.act-btn.muted { background: var(--cream-dk); color: var(--ink); border: 1.5px solid var(--ink-15); }
+.act-btn.muted:hover { border-color: var(--gold); background: var(--cream); }
+
+/* TOAST */
+.toast {
+  position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%) translateY(8px);
+  background: var(--forest); color: white;
+  padding: 10px 22px; border-radius: 30px;
+  font-size: 13px; font-weight: 500;
+  opacity: 0; pointer-events: none; z-index: 9999;
+  transition: all 0.28s ease; white-space: nowrap;
+}
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+/* FOOTER */
+footer { background: var(--ink); color: var(--cream); padding: 36px 24px; text-align: center; }
+.footer-name { font-family: var(--serif); font-size: 22px; color: var(--gold-lt); margin-bottom: 8px; }
+.footer-details { font-size: 12.5px; opacity: 0.45; line-height: 2; }
+.footer-melegatti { margin-top: 14px; font-size: 11.5px; opacity: 0.35; }
+.footer-melegatti a { color: var(--gold); text-decoration: none; opacity: 1; }
+
+/* RESPONSIVE */
+@media (max-width: 640px) {
+  .melegatti-link { display: none; }
+  .product-row { grid-template-columns: 90px 1fr; grid-template-rows: auto auto; }
+  .product-img { width: 90px; height: 90px; grid-row: 1 / 3; }
+  .product-qty-col { grid-column: 2; padding: 0 16px 14px; flex-direction: row; align-items: center; gap: 12px; }
+  .qty-label { display: none; }
+  .summary-bar { flex-direction: column; gap: 10px; padding: 16px 20px 20px; }
+  .summary-bar-btn { width: 100%; text-align: center; padding: 14px; }
+  .form-grid { grid-template-columns: 1fr; }
+  .action-row { flex-direction: column; }
+  .hero { padding: 40px 20px 36px; }
+}
+</style>
+</head>
+<body>
+
+<div class="toast" id="toast"></div>
+
+<header>
+  <a href="#" class="logo">
+    <div class="logo-mark">FR</div>
+    <span class="logo-name">Foodroute</span>
+  </a>
+  <div class="header-right">
+    <a href="https://www.melegatti.it/en/" target="_blank" rel="noopener" class="melegatti-link">Melegatti Official &rarr;</a>
+    <div class="cart-pill" onclick="openModal()">
+      &#128722; Pre-Order
+      <span class="cart-count" id="cartCount">0</span>
+    </div>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="hero-tag">&#127470;&#127481; Christmas 2025 &mdash; Limited Allocation</div>
+  <h1>Melegatti Panettone<br><em>Pre-Order Form</em></h1>
+  <p>Select your cartons below, review your order, and submit. A Foodroute representative will confirm your allocation and deposit within 1&ndash;2 business days.</p>
+  <a href="#products" class="hero-cta">Start Your Order &darr;</a>
+</div>
+
+<div class="page-body">
+  <div id="products">
+    <div class="section-head">
+      <h2>Select Your Cartons</h2>
+      <div class="section-head-line"></div>
+    </div>
+    <div class="product-list" id="productList"></div>
+  </div>
+
+  <div class="deposit-block">
+    <div class="deposit-icon">&#128274;</div>
+    <div>
+      <div class="deposit-title">Deposit Secures Your Allocation</div>
+      <div class="deposit-text">
+        Submitting this form is a <strong>non-binding pre-order</strong>. A Foodroute representative will send you a formal invoice. A <strong>deposit (approx. 30&ndash;50%)</strong> is required within 5 business days to lock in your cartons and price. Balance is due before dispatch. Christmas delivery.
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="summary-bar" id="summaryBar">
+  <div class="summary-bar-info">
+    <div class="summary-bar-label">Your Pre-Order Total</div>
+    <div class="summary-bar-total" id="barTotal">R0.00</div>
+    <div class="summary-bar-sub" id="barSub">0 cartons selected</div>
+  </div>
+  <button class="summary-bar-btn" onclick="openModal()">Review &amp; Submit &rarr;</button>
+</div>
+
+<!-- CHECKOUT MODAL -->
+<div class="overlay" id="checkoutOverlay">
+  <div class="modal">
+    <div class="modal-top">
+      <div>
+        <h2>Your Pre-Order</h2>
+        <p>Review and enter your details to submit</p>
+      </div>
+      <button class="modal-close" onclick="closeModal()">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="order-recap" id="orderRecap"></div>
+      <div class="form-section-label">Your Details</div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label">Company Name</label>
+          <input class="form-input" id="f_company" type="text" placeholder="Acme Retail (Pty) Ltd">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Contact Person *</label>
+          <input class="form-input" id="f_contact" type="text" placeholder="Jane Smith">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email *</label>
+          <input class="form-input" id="f_email" type="email" placeholder="jane@company.co.za">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Phone / WhatsApp *</label>
+          <input class="form-input" id="f_phone" type="tel" placeholder="+27 81 234 5678">
+        </div>
+        <div class="form-group full">
+          <label class="form-label">Delivery Address</label>
+          <input class="form-input" id="f_address" type="text" placeholder="123 Main Rd, Sandton, 2196">
+        </div>
+        <div class="form-group full">
+          <label class="form-label">Notes</label>
+          <textarea class="form-textarea" id="f_notes" placeholder="Delivery requirements, split orders, preferred date&hellip;"></textarea>
+        </div>
+      </div>
+      <div class="deposit-reminder">
+        &#128179; <strong>Deposit required to confirm.</strong> This is a non-binding pre-order. A formal invoice with deposit instructions (approx. 30&ndash;50%) will follow within 1&ndash;2 business days.
+      </div>
+      <button class="submit-btn" onclick="submitOrder()">&#10022; Submit Pre-Order</button>
+    </div>
+  </div>
+</div>
+
+<!-- SUCCESS MODAL -->
+<div class="overlay" id="successOverlay">
+  <div class="modal">
+    <div class="success-top">
+      <div class="success-icon">&#127876;</div>
+      <h2>Pre-Order Submitted!</h2>
+      <p>We&rsquo;ll be in touch within 1&ndash;2 business days with your invoice.</p>
+    </div>
+    <div class="success-body">
+      <div class="summary-block" id="summaryOut"></div>
+      <div class="action-row">
+        <button class="act-btn red" onclick="copyOrder()">&#128203; Copy Summary</button>
+        <button class="act-btn green" onclick="whatsappOrder()">&#128172; WhatsApp Us</button>
+        <button class="act-btn muted" onclick="window.print()">&#128424; Print / PDF</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-name">Foodroute</div>
+  <div class="footer-details">
+    orders@foodroute.co.za &nbsp;&middot;&nbsp; +27 (0)__ ___ ____<br>
+    Johannesburg, South Africa &nbsp;&middot;&nbsp; WhatsApp orders welcome
+  </div>
+  <div class="footer-melegatti">
+    Official Melegatti importer &nbsp;&middot;&nbsp;
+    <a href="https://www.melegatti.it/en/" target="_blank" rel="noopener">melegatti.it</a>
+    &nbsp;&middot;&nbsp; Est. Verona 1894
+  </div>
+</footer>
+
+<script>
+// Product data — images read from hidden DOM elements (avoids base64-in-JS quoting issues)
+var PRODUCTS = [
+  { id: 'p1', name: 'Classic Pandoro',        size: '750 g', perCarton: 12, price: 2520 },
+  { id: 'p2', name: 'Classic Panettone',       size: '750 g', perCarton: 12, price: 2400 },
+  { id: 'p3', name: 'Pistachio Cream Pandoro', size: '750 g', perCarton: 12, price: 2840 },
+  { id: 'p4', name: 'Gianduja Pandoro',        size: '750 g', perCarton: 12, price: 2640 },
+];
+
+var qty = {};
+PRODUCTS.forEach(function(p) { qty[p.id] = 0; });
+
+function fmt(n) {
+  return 'R ' + n.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+}
+
+function renderProducts() {
+  var list = document.getElementById('productList');
+  list.innerHTML = PRODUCTS.map(function(p) {
+    var imgSrc = document.getElementById('img-' + p.id).src;
+    return '<div class="product-row" id="row-' + p.id + '">'
+      + '<img class="product-img" src="' + imgSrc + '" alt="' + p.name + '">'
+      + '<div class="product-info">'
+      +   '<div class="product-name">' + p.name + '</div>'
+      +   '<div class="product-meta">Melegatti &middot; ' + p.size + ' &middot; ' + p.perCarton + ' cakes per carton</div>'
+      +   '<div class="product-price-row">'
+      +     '<div class="price-carton">' + fmt(p.price) + '<span style="font-size:13px;font-weight:400;color:var(--ink-60)"> / carton</span></div>'
+      +     '<div class="price-unit">&asymp; <strong>' + fmt(p.price / p.perCarton) + '</strong> per cake</div>'
+      +   '</div>'
+      + '</div>'
+      + '<div class="product-qty-col">'
+      +   '<div class="qty-label">Cartons</div>'
+      +   '<div class="qty-wrap">'
+      +     '<button class="qty-btn" onclick="change(\u0027' + p.id + '\u0027,-1)">&minus;</button>'
+      +     '<input class="qty-input" type="number" id="qty-' + p.id + '" value="0" min="0" onchange="set(\u0027' + p.id + '\u0027,this.value)">'
+      +     '<button class="qty-btn" onclick="change(\u0027' + p.id + '\u0027,1)">+</button>'
+      +   '</div>'
+      +   '<div class="row-total" id="rtotal-' + p.id + '"></div>'
+      + '</div>'
+      + '</div>';
+  }).join('');
+}
+
+function change(id, d) { apply(id, Math.max(0, (qty[id] || 0) + d)); }
+function set(id, v)    { apply(id, Math.max(0, parseInt(v) || 0)); }
+
+function apply(id, n) {
+  qty[id] = n;
+  document.getElementById('qty-' + id).value = n;
+  var p   = PRODUCTS.filter(function(x) { return x.id === id; })[0];
+  var rt  = document.getElementById('rtotal-' + id);
+  var row = document.getElementById('row-' + id);
+  if (n > 0) { rt.textContent = fmt(p.price * n); row.classList.add('has-qty'); }
+  else        { rt.textContent = '';               row.classList.remove('has-qty'); }
+  updateBar();
+}
+
+function totals() {
+  var total = 0, cartons = 0;
+  PRODUCTS.forEach(function(p) { total += p.price * (qty[p.id] || 0); cartons += qty[p.id] || 0; });
+  return { total: total, cartons: cartons };
+}
+
+function updateBar() {
+  var t = totals();
+  document.getElementById('barTotal').textContent = fmt(t.total);
+  document.getElementById('barSub').textContent   = t.cartons + ' carton' + (t.cartons !== 1 ? 's' : '') + ' · ' + (t.cartons * 12) + ' cakes';
+  var bar = document.getElementById('summaryBar');
+  var cc  = document.getElementById('cartCount');
+  if (t.cartons > 0) { bar.classList.add('visible'); cc.style.display = 'flex'; cc.textContent = t.cartons; }
+  else               { bar.classList.remove('visible'); cc.style.display = 'none'; }
+}
+
+function openModal() {
+  var t = totals();
+  if (t.cartons === 0) { showToast('Select at least one carton first.'); return; }
+  var items = PRODUCTS.filter(function(p) { return qty[p.id] > 0; });
+  var html  = '<div class="recap-title">&#128230; Order Summary</div>';
+  items.forEach(function(p) {
+    html += '<div class="recap-item"><span>' + p.name + ' &times; ' + qty[p.id] + ' ctn</span><span>' + fmt(p.price * qty[p.id]) + '</span></div>';
+  });
+  html += '<div class="recap-total"><span>Total</span><span>' + fmt(t.total) + '</span></div>';
+  document.getElementById('orderRecap').innerHTML = html;
+  document.getElementById('checkoutOverlay').classList.add('open');
+}
+function closeModal() { document.getElementById('checkoutOverlay').classList.remove('open'); }
+
+document.addEventListener('click', function(e) {
+  if (e.target === document.getElementById('checkoutOverlay')) closeModal();
+  if (e.target === document.getElementById('successOverlay'))  document.getElementById('successOverlay').classList.remove('open');
+});
+
+function submitOrder() {
+  var contact = document.getElementById('f_contact').value.trim();
+  var email   = document.getElementById('f_email').value.trim();
+  var phone   = document.getElementById('f_phone').value.trim();
+  if (!contact) { showToast('Please enter a contact name.'); return; }
+  if (!email)   { showToast('Please enter an email address.'); return; }
+  if (!phone)   { showToast('Please enter a phone number.'); return; }
+
+  var company = document.getElementById('f_company').value.trim() || '—';
+  var address = document.getElementById('f_address').value.trim() || '—';
+  var notes   = document.getElementById('f_notes').value.trim()   || '—';
+  var t       = totals();
+  var items   = PRODUCTS.filter(function(p) { return qty[p.id] > 0; });
+  var date    = new Date().toLocaleDateString('en-ZA', { day:'2-digit', month:'long', year:'numeric' });
+
+  var line = '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━';
+  var thin = '───────────────────────────────';
+  var s = line + '\nFOODROUTE × MELEGATTI\nCHRISTMAS 2025 PRE-ORDER\n' + line + '\nDate:     ' + date
+        + '\n\nCUSTOMER\n' + thin
+        + '\nCompany:  ' + company
+        + '\nContact:  ' + contact
+        + '\nEmail:    ' + email
+        + '\nPhone:    ' + phone
+        + '\nAddress:  ' + address
+        + '\nNotes:    ' + notes
+        + '\n\nORDER\n' + thin + '\n';
+  items.forEach(function(p) {
+    var q = qty[p.id];
+    s += p.name + ' (' + p.size + ')\n  ' + q + ' carton' + (q!==1?'s':'') + ' × ' + fmt(p.price) + ' = ' + fmt(p.price*q) + '\n  (' + (q*p.perCarton) + ' cakes)\n\n';
+  });
+  s += thin + '\nTOTAL CARTONS: ' + t.cartons + '\nORDER TOTAL:   ' + fmt(t.total)
+     + '\n' + thin
+     + '\nDeposit (~30-50%) required to confirm.'
+     + '\nInvoice to follow within 1-2 business days.'
+     + '\n\nFoodroute | orders@foodroute.co.za'
+     + '\n+27 (0)__ ___ ____ | WhatsApp welcome'
+     + '\nmelegatti.it/en — Verona, Italy, Est. 1894'
+     + '\n' + line;
+
+  window._summary = s;
+  document.getElementById('summaryOut').textContent = s;
+  document.getElementById('checkoutOverlay').classList.remove('open');
+  document.getElementById('successOverlay').classList.add('open');
+}
+
+function copyOrder() {
+  navigator.clipboard.writeText(window._summary || '')
+    .then(function() { showToast('Summary copied!'); })
+    .catch(function() { showToast('Please select and copy manually.'); });
+}
+function whatsappOrder() {
+  var num = '27000000000'; // replace with your number
+  window.open('https://wa.me/' + num + '?text=' + encodeURIComponent(window._summary || ''), '_blank');
+}
+
+function showToast(msg) {
+  var t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  clearTimeout(window._tt);
+  window._tt = setTimeout(function() { t.classList.remove('show'); }, 2800);
+}
+
+renderProducts();
+</script>
+</body>
+</html>

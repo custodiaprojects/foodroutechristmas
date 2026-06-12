@@ -591,7 +591,7 @@ footer { background: var(--ink); color: var(--cream); padding: 36px 24px; text-a
         </div>
         <div class="next-step">
           <div class="next-step-icon">&#9742;&#65039;</div>
-          <div class="next-step-text"><strong>Need to chat?</strong>Call our office on <a href="tel:0113924333" style="color: var(--crimson); font-weight: 700;">011 392 4333</a> for any questions.</div>
+          <div class="next-step-text"><strong>Need to chat?</strong>Johannesburg &amp; Pretoria: <a href="tel:0113924333" style="color: var(--crimson); font-weight: 700;">011 392 4333</a> &nbsp;&middot;&nbsp; Durban: <a href="tel:0328151410" style="color: var(--crimson); font-weight: 700;">032 815 1410</a></div>
         </div>
       </div>
       <div class="form-section-label">Order Summary</div>
@@ -608,10 +608,14 @@ footer { background: var(--ink); color: var(--cream); padding: 36px 24px; text-a
 <footer>
   <div class="footer-name">Foodroute &mdash; Food Service Solutions</div>
   <div class="footer-details">
+    Johannesburg &amp; Pretoria &mdash;
     <a href="mailto:sales@foodroutejhb.co.za">sales@foodroutejhb.co.za</a>
     &nbsp;&middot;&nbsp;
     <a href="tel:0113924333">011 392 4333</a><br>
-    Johannesburg &middot; Pretoria &middot; Durban
+    Durban &mdash;
+    <a href="mailto:orders@foodroutejhb.co.za">orders@foodroutejhb.co.za</a>
+    &nbsp;&middot;&nbsp;
+    <a href="tel:0328151410">032 815 1410</a>
   </div>
   <div class="footer-melegatti">
     Official Melegatti importer &middot;
@@ -826,7 +830,8 @@ function buildSummary(d) {
   s += "* Payment arrangements via WhatsApp from\n";
   s += "  Foodroute office after order receipt.\n\n";
   s += "Foodroute Food Service Solutions\n";
-  s += "sales@foodroutejhb.co.za | 011 392 4333\n";
+  s += "JHB/PTA: sales@foodroutejhb.co.za | 011 392 4333\n";
+  s += "Durban:  orders@foodroutejhb.co.za | 032 815 1410\n";
   s += line;
   return s;
 }
@@ -886,7 +891,7 @@ function submitOrder() {
     order_total:      fmt(t.total) + " excl. VAT + " + fmt(t.total * 0.15) + " VAT = " + fmt(t.total * 1.15) + " incl. VAT",
     notes:            data.notes || "(none)",
     order_date:       data.date,
-    cc_email:         "sales@foodroutejhb.co.za",
+    cc_email:         "sales@foodroutejhb.co.za, orders@foodroutejhb.co.za",
   };
 
   function showSuccess() {
@@ -919,10 +924,10 @@ function openMailtoFallback(d, summary) {
   var body = "Hi " + d.contact + ",\n\n"
     + "Thank you for your Foodroute × Melegatti Christmas 2026 pre-order. Below is your order summary.\n\n"
     + "Our office has received your order and will be in touch via WhatsApp shortly with payment arrangements for December delivery.\n\n"
-    + "If you have any questions, please call us on 011 392 4333 or reply to this email.\n\n"
+    + "If you have any questions, please contact us:\nJHB/PTA: 011 392 4333 | sales@foodroutejhb.co.za\nDurban: 032 815 1410 | orders@foodroutejhb.co.za\n\n"
     + summary
-    + "\n\nKind regards,\nFoodroute Sales Team\nsales@foodroutejhb.co.za\n011 392 4333";
-  var url = "mailto:" + d.email + "?cc=sales@foodroutejhb.co.za"
+    + "\n\nKind regards,\nFoodroute Sales Team\nJHB/PTA: sales@foodroutejhb.co.za | 011 392 4333\nDurban: orders@foodroutejhb.co.za | 032 815 1410";
+  var url = "mailto:" + d.email + "?cc=sales@foodroutejhb.co.za,orders@foodroutejhb.co.za"
     + "&subject=" + encodeURIComponent(subject)
     + "&body=" + encodeURIComponent(body);
   /* Use setTimeout to keep modal flow smooth */

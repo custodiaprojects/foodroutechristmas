@@ -459,7 +459,7 @@ footer { background: var(--ink); color: var(--cream); padding: 36px 24px; text-a
       </div>
       <div class="process-step">
         <div class="step-num">3</div>
-        <div class="step-body"><strong>Delivery</strong>Your Melegatti stock is delivered direct to your door in December, in time for Christmas.</div>
+        <div class="step-body"><strong>Delivery</strong>Your Melegatti stock is delivered in October 2026 &mdash; well ahead of the festive season, ready for gifting or resale.</div>
       </div>
     </div>
   </div>
@@ -489,7 +489,7 @@ footer { background: var(--ink); color: var(--cream); padding: 36px 24px; text-a
       </div>
       <div>
         <strong style="font-family: var(--serif); font-size: 16px; color: var(--crimson); display:block; margin-bottom:6px;">&#128205; Delivery Areas</strong>
-        This offer is available to <strong>Johannesburg, Pretoria and Durban</strong> customers only. December 2026 delivery direct to your premises.
+        This offer is available to <strong>Johannesburg, Pretoria and Durban</strong> customers only. October 2026 delivery direct to your premises &mdash; be prepared for gifting or resale over the festive period.
       </div>
     </div>
   </div>
@@ -559,7 +559,7 @@ footer { background: var(--ink); color: var(--cream); padding: 36px 24px; text-a
         </div>
       </div>
       <div class="payment-reminder">
-        &#128231; <strong>What happens next?</strong> You&rsquo;ll receive an order confirmation email immediately upon submission. Our office will then send you a WhatsApp confirming receipt, along with payment arrangements for December delivery.
+        &#128231; <strong>What happens next?</strong> You&rsquo;ll receive an order confirmation email immediately upon submission. Our office will then send you a WhatsApp confirming receipt, along with payment arrangements for October delivery.
       </div>
       <button class="submit-btn" id="submitBtn" onclick="submitOrder()">Submit Pre-Order &rarr;</button>
     </div>
@@ -583,11 +583,11 @@ footer { background: var(--ink); color: var(--cream); padding: 36px 24px; text-a
         </div>
         <div class="next-step">
           <div class="next-step-icon">&#128241;</div>
-          <div class="next-step-text"><strong>WhatsApp from Office</strong>Once our team has received your order, we&rsquo;ll WhatsApp you with payment arrangements for December delivery.</div>
+          <div class="next-step-text"><strong>WhatsApp from Office</strong>Once our team has received your order, we&rsquo;ll WhatsApp you with payment arrangements for October delivery.</div>
         </div>
         <div class="next-step">
           <div class="next-step-icon">&#127876;</div>
-          <div class="next-step-text"><strong>December 2026 Delivery</strong>Your Melegatti stock arrives in time for Christmas, direct to your premises.</div>
+          <div class="next-step-text"><strong>October 2026 Delivery</strong>Your Melegatti stock arrives well ahead of the festive season &mdash; ready for gifting or resale over Christmas.</div>
         </div>
         <div class="next-step">
           <div class="next-step-icon">&#9742;&#65039;</div>
@@ -613,7 +613,7 @@ footer { background: var(--ink); color: var(--cream); padding: 36px 24px; text-a
     &nbsp;&middot;&nbsp;
     <a href="tel:0113924333">011 392 4333</a><br>
     Durban &mdash;
-    <a href="mailto:orders@foodroutejhb.co.za">orders@foodroutejhb.co.za</a>
+    <a href="mailto:orders@foodroutedbn.co.za">orders@foodroutedbn.co.za</a>
     &nbsp;&middot;&nbsp;
     <a href="tel:0328151410">032 815 1410</a>
   </div>
@@ -826,12 +826,12 @@ function buildSummary(d) {
   s += thin + "\n";
   s += "Formal invoice to follow.\n\n";
   s += "* Pre-orders close Friday, 19 June 2026\n";
-  s += "* Delivery December 2026, JHB/PTA/DBN\n";
+  s += "* Delivery October 2026, JHB/PTA/DBN\n";
   s += "* Payment arrangements via WhatsApp from\n";
   s += "  Foodroute office after order receipt.\n\n";
   s += "Foodroute Food Service Solutions\n";
   s += "JHB/PTA: sales@foodroutejhb.co.za | 011 392 4333\n";
-  s += "Durban:  orders@foodroutejhb.co.za | 032 815 1410\n";
+  s += "Durban:  orders@foodroutedbn.co.za | 032 815 1410\n";
   s += line;
   return s;
 }
@@ -891,7 +891,7 @@ function submitOrder() {
     order_total:      fmt(t.total) + " excl. VAT + " + fmt(t.total * 0.15) + " VAT = " + fmt(t.total * 1.15) + " incl. VAT",
     notes:            data.notes || "(none)",
     order_date:       data.date,
-    cc_email:         "sales@foodroutejhb.co.za, orders@foodroutejhb.co.za",
+    cc_email:         "sales@foodroutejhb.co.za, orders@foodroutedbn.co.za",
   };
 
   function showSuccess() {
@@ -923,11 +923,11 @@ function openMailtoFallback(d, summary) {
   var subject = "Foodroute Christmas 2026 Pre-Order — " + (d.company !== "—" ? d.company : d.contact);
   var body = "Hi " + d.contact + ",\n\n"
     + "Thank you for your Foodroute × Melegatti Christmas 2026 pre-order. Below is your order summary.\n\n"
-    + "Our office has received your order and will be in touch via WhatsApp shortly with payment arrangements for December delivery.\n\n"
-    + "If you have any questions, please contact us:\nJHB/PTA: 011 392 4333 | sales@foodroutejhb.co.za\nDurban: 032 815 1410 | orders@foodroutejhb.co.za\n\n"
+    + "Our office has received your order and will be in touch via WhatsApp shortly with payment arrangements for October delivery.\n\n"
+    + "If you have any questions, please contact us:\nJHB/PTA: 011 392 4333 | sales@foodroutejhb.co.za\nDurban: 032 815 1410 | orders@foodroutedbn.co.za\n\n"
     + summary
-    + "\n\nKind regards,\nFoodroute Sales Team\nJHB/PTA: sales@foodroutejhb.co.za | 011 392 4333\nDurban: orders@foodroutejhb.co.za | 032 815 1410";
-  var url = "mailto:" + d.email + "?cc=sales@foodroutejhb.co.za,orders@foodroutejhb.co.za"
+    + "\n\nKind regards,\nFoodroute Sales Team\nJHB/PTA: sales@foodroutejhb.co.za | 011 392 4333\nDurban: orders@foodroutedbn.co.za | 032 815 1410";
+  var url = "mailto:" + d.email + "?cc=sales@foodroutejhb.co.za,orders@foodroutedbn.co.za"
     + "&subject=" + encodeURIComponent(subject)
     + "&body=" + encodeURIComponent(body);
   /* Use setTimeout to keep modal flow smooth */

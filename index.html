@@ -969,7 +969,7 @@ function postToSheet(data, t) {
   fetch(SHEET_WEBHOOK_URL, {
     method: "POST",
     mode: "no-cors",
-    headers: { "Content-Type": "application/json" },
+    headers: { "Content-Type": "text/plain" },
     body: JSON.stringify(payload),
   }).catch(function(err) {
     console.warn("Sheet post failed (order still submitted):", err);

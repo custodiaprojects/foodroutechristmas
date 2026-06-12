@@ -3,19 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Foodroute × Melegatti — Christmas Pre-Order 2025</title>
+<title>Foodroute × Melegatti — Christmas 2026 Pre-Order</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-<!-- Product images stored in DOM, read by JS — avoids base64-in-JS escaping issues -->
-<img id="img-p1" src="https://raw.githubusercontent.com/custodiaprojects/foodroutechristmas/main/P1.png" style="display:none" alt="" crossorigin="anonymous">
-<img id="img-p2" src="https://raw.githubusercontent.com/custodiaprojects/foodroutechristmas/main/P2.png" style="display:none" alt="" crossorigin="anonymous">
-<img id="img-p3" src="https://raw.githubusercontent.com/custodiaprojects/foodroutechristmas/main/P3.png" style="display:none" alt="" crossorigin="anonymous">
-<img id="img-p4" src="https://raw.githubusercontent.com/custodiaprojects/foodroutechristmas/main/P4.png" style="display:none" alt="" crossorigin="anonymous">
+<!-- EmailJS SDK -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
 <style>
 :root {
   --crimson:  #8B1A1A;
+  --crimson-dk:#6A0E0E;
   --gold:     #C9952A;
   --gold-lt:  #E8B84B;
   --gold-pale:#F5E6C3;
@@ -33,62 +31,45 @@
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
-body {
-  background: var(--cream);
-  font-family: var(--sans);
-  color: var(--ink);
-  font-size: 15px;
-  line-height: 1.6;
-  min-height: 100vh;
-}
+body { background: var(--cream); font-family: var(--sans); color: var(--ink); font-size: 15px; line-height: 1.6; min-height: 100vh; }
 button { cursor: pointer; border: none; background: none; font-family: inherit; }
-input, textarea { font-family: inherit; }
+input, select, textarea { font-family: inherit; }
 a { color: inherit; }
-::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 3px; }
 
-/* HEADER */
+/* ─── HEADER ─── */
 header {
-  background: var(--crimson);
-  padding: 0 24px; height: 60px;
+  background: var(--cream); padding: 0 24px; height: 84px;
   display: flex; align-items: center; justify-content: space-between;
   position: sticky; top: 0; z-index: 100;
-  box-shadow: 0 2px 16px rgba(0,0,0,0.3);
+  border-bottom: 2px solid var(--gold);
+  box-shadow: 0 2px 16px rgba(26,18,8,0.06);
 }
-.logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--gold-pale); }
-.logo-mark {
-  width: 36px; height: 36px; border-radius: 50%;
-  background: linear-gradient(135deg, var(--gold) 0%, #7A4A10 100%);
-  border: 1.5px solid rgba(255,255,255,0.2);
-  display: flex; align-items: center; justify-content: center;
-  font-family: var(--serif); font-size: 16px; font-weight: 600; color: white;
-}
-.logo-name { font-family: var(--serif); font-size: 18px; font-weight: 600; letter-spacing: 0.02em; }
-.header-right { display: flex; align-items: center; gap: 16px; }
-.melegatti-link {
-  font-size: 11px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase;
-  color: var(--gold-pale); text-decoration: none; opacity: 0.65; transition: opacity 0.2s;
-}
-.melegatti-link:hover { opacity: 1; }
+.logo-link { display: flex; align-items: center; height: 60px; }
+.logo-link img { height: 100%; width: auto; display: block; }
+.header-right { display: flex; align-items: center; gap: 14px; }
+.melegatti-link { font-size: 11px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-60); text-decoration: none; transition: color 0.2s; }
+.melegatti-link:hover { color: var(--crimson); }
 .cart-pill {
   display: flex; align-items: center; gap: 7px;
-  background: var(--gold); color: var(--crimson);
-  padding: 7px 16px; border-radius: 30px;
+  background: var(--crimson); color: var(--gold-pale);
+  padding: 10px 18px; border-radius: 30px;
   font-size: 12px; font-weight: 600; letter-spacing: 0.06em;
-  transition: background 0.2s, transform 0.2s; cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
 }
-.cart-pill:hover { background: var(--gold-lt); transform: translateY(-1px); }
+.cart-pill:hover { background: var(--crimson-dk); transform: translateY(-1px); }
 .cart-count {
-  background: var(--crimson); color: white;
-  width: 18px; height: 18px; border-radius: 50%;
-  font-size: 10px; font-weight: 700;
+  background: var(--gold); color: var(--crimson);
+  width: 20px; height: 20px; border-radius: 50%;
+  font-size: 11px; font-weight: 700;
   display: none; align-items: center; justify-content: center;
 }
 
-/* HERO */
+/* ─── HERO ─── */
 .hero {
   background: linear-gradient(150deg, var(--crimson) 0%, #5A0A0A 55%, var(--forest) 100%);
-  color: white; padding: 52px 24px 44px;
+  color: white; padding: 56px 24px 48px;
   text-align: center; position: relative; overflow: hidden;
 }
 .hero::after {
@@ -100,46 +81,93 @@ header {
   display: inline-block;
   font-size: 10px; font-weight: 600; letter-spacing: 0.24em; text-transform: uppercase;
   color: var(--gold); background: rgba(201,149,42,0.12);
-  border: 1px solid rgba(201,149,42,0.3);
+  border: 1px solid rgba(201,149,42,0.4);
   padding: 5px 16px; border-radius: 20px; margin-bottom: 18px;
 }
 .hero h1 {
-  font-family: var(--serif); font-size: clamp(32px, 5vw, 58px);
-  font-weight: 400; line-height: 1.08;
-  margin-bottom: 14px; position: relative; z-index: 1;
+  font-family: var(--serif); font-size: clamp(32px, 5vw, 56px);
+  font-weight: 400; line-height: 1.1; margin-bottom: 16px;
+  position: relative; z-index: 1;
 }
 .hero h1 em { font-style: italic; color: var(--gold-lt); }
 .hero p {
-  font-size: 14px; font-weight: 300; line-height: 1.75;
-  opacity: 0.78; max-width: 500px; margin: 0 auto 24px; position: relative; z-index: 1;
+  font-size: 14.5px; font-weight: 300; line-height: 1.75;
+  opacity: 0.85; max-width: 580px; margin: 0 auto 14px; position: relative; z-index: 1;
+}
+.deadline-banner {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: var(--gold); color: var(--crimson);
+  padding: 10px 22px; border-radius: 30px;
+  font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+  margin: 6px auto 20px; position: relative; z-index: 1;
+  box-shadow: 0 4px 18px rgba(201,149,42,0.4);
+}
+.region-line {
+  font-size: 11.5px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase;
+  color: rgba(255,255,255,0.6); margin-bottom: 24px; position: relative; z-index: 1;
 }
 .hero-cta {
   display: inline-flex; align-items: center; gap: 8px;
-  background: var(--gold); color: var(--crimson);
-  padding: 13px 28px; border-radius: 30px;
-  font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
-  text-decoration: none; transition: background 0.2s, transform 0.2s; position: relative; z-index: 1;
+  background: white; color: var(--crimson);
+  padding: 14px 30px; border-radius: 30px;
+  font-size: 13px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+  text-decoration: none; transition: all 0.2s; position: relative; z-index: 1;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.18);
 }
-.hero-cta:hover { background: var(--gold-lt); transform: translateY(-2px); }
+.hero-cta:hover { background: var(--gold); transform: translateY(-2px); }
 
-/* PAGE BODY */
+/* ─── PAGE BODY ─── */
 .page-body {
-  max-width: 900px; margin: 0 auto;
-  padding: 48px 20px 80px;
-  display: flex; flex-direction: column; gap: 48px;
+  max-width: 940px; margin: 0 auto;
+  padding: 40px 20px 100px;
+  display: flex; flex-direction: column; gap: 36px;
 }
 
-/* SECTION HEADING */
-.section-head { display: flex; align-items: center; gap: 14px; margin-bottom: 24px; }
-.section-head h2 { font-family: var(--serif); font-size: 26px; font-weight: 600; white-space: nowrap; }
+/* ─── PROCESS STEPS ─── */
+.process-box {
+  background: white; border-radius: var(--rad);
+  padding: 22px 26px;
+  border: 1px solid var(--ink-15);
+  box-shadow: var(--shadow);
+}
+.process-title {
+  font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 14px;
+}
+.process-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.process-step { display: flex; gap: 12px; align-items: flex-start; }
+.step-num {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: var(--crimson); color: var(--gold-pale);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--serif); font-size: 14px; font-weight: 700;
+  flex-shrink: 0;
+}
+.step-body { font-size: 13px; line-height: 1.55; color: var(--ink-60); }
+.step-body strong { color: var(--ink); font-weight: 600; display: block; margin-bottom: 2px; font-family: var(--serif); font-size: 15px; }
+
+/* ─── SECTION HEADING ─── */
+.section-head { display: flex; align-items: center; gap: 14px; }
+.section-head h2 { font-family: var(--serif); font-size: 28px; font-weight: 600; white-space: nowrap; }
 .section-head-line { flex: 1; height: 1px; background: linear-gradient(to right, var(--gold) 0%, transparent 100%); opacity: 0.3; }
 
-/* PRODUCT ROWS */
-.product-list { display: flex; flex-direction: column; gap: 14px; }
+/* ─── VAT BANNER ─── */
+.vat-banner {
+  background: linear-gradient(135deg, #FFF7E0 0%, #FBF0CB 100%);
+  border: 1.5px solid var(--gold);
+  border-radius: 10px;
+  padding: 12px 18px;
+  display: flex; align-items: center; gap: 12px;
+  font-size: 13px; color: var(--ink); font-weight: 500;
+}
+.vat-banner-icon { font-size: 18px; }
+.vat-banner strong { color: var(--crimson); font-weight: 700; letter-spacing: 0.04em; }
+
+/* ─── PRODUCT ROWS ─── */
+.product-list { display: flex; flex-direction: column; gap: 12px; }
 .product-row {
-  background: white; border-radius: var(--rad);
-  box-shadow: var(--shadow);
-  display: grid; grid-template-columns: 130px 1fr auto;
+  background: white; border-radius: var(--rad); box-shadow: var(--shadow);
+  display: grid; grid-template-columns: 120px 1fr auto;
   align-items: center; overflow: hidden;
   transition: box-shadow 0.22s, transform 0.22s;
   border: 1.5px solid transparent;
@@ -148,63 +176,77 @@ header {
 .product-row.has-qty { border-color: var(--gold); background: #FFFDF7; }
 
 .product-img {
-  width: 130px; height: 110px;
+  width: 120px; height: 110px;
   object-fit: cover; object-position: center;
   display: block; background: #0a0a0a;
 }
-.product-info { padding: 16px 20px; min-width: 0; }
-.product-name { font-family: var(--serif); font-size: 20px; font-weight: 600; line-height: 1.2; margin-bottom: 4px; }
-.product-meta { font-size: 12px; color: var(--ink-60); letter-spacing: 0.04em; margin-bottom: 10px; }
-.product-price-row { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
-.price-carton { font-family: var(--serif); font-size: 22px; font-weight: 600; color: var(--crimson); }
-.price-unit { font-size: 12px; color: var(--ink-60); }
-.price-unit strong { color: var(--forest); font-weight: 600; }
+.product-img.fallback {
+  background: linear-gradient(135deg, var(--cream-dk) 0%, #E8D5B0 100%);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 36px;
+}
+
+.product-info { padding: 14px 20px; min-width: 0; }
+.product-name { font-family: var(--serif); font-size: 19px; font-weight: 600; line-height: 1.2; margin-bottom: 3px; }
+.product-meta { font-size: 11.5px; color: var(--ink-60); letter-spacing: 0.04em; margin-bottom: 8px; }
+.product-price-row { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+.price-each { font-family: var(--serif); font-size: 22px; font-weight: 600; color: var(--crimson); }
+.price-each-unit { font-size: 12px; color: var(--ink-60); font-weight: 500; }
+.vat-tag {
+  display: inline-block;
+  font-size: 9px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--gold); background: rgba(201,149,42,0.13);
+  padding: 2px 7px; border-radius: 4px; margin-left: 2px;
+}
+.carton-hint { font-size: 11px; color: var(--ink-60); margin-top: 4px; opacity: 0.85; }
 
 .product-qty-col {
-  padding: 16px 20px 16px 0;
-  display: flex; flex-direction: column; align-items: flex-end; gap: 8px;
+  padding: 14px 20px 14px 0;
+  display: flex; flex-direction: column; align-items: flex-end; gap: 6px;
 }
 .qty-label { font-size: 10px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-60); }
-.qty-wrap {
-  display: flex; align-items: center;
+.qty-select-wrap { position: relative; display: flex; align-items: center; gap: 6px; }
+.qty-select {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 84px; height: 40px;
+  padding: 0 28px 0 14px;
   border: 1.5px solid var(--ink-15); border-radius: 8px;
-  overflow: hidden; background: white;
-}
-.qty-btn {
-  width: 34px; height: 38px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 20px; color: var(--crimson); transition: background 0.15s; flex-shrink: 0;
-}
-.qty-btn:hover { background: var(--cream); }
-.qty-input {
-  width: 42px; height: 38px; text-align: center; border: none;
-  border-left: 1.5px solid var(--ink-15); border-right: 1.5px solid var(--ink-15);
+  background: white;
   font-family: var(--serif); font-size: 17px; font-weight: 600; color: var(--ink);
-  -moz-appearance: textfield;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'><path d='M1 1l4 4 4-4' stroke='%238B1A1A' stroke-width='1.5' fill='none' stroke-linecap='round'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  transition: border-color 0.18s, box-shadow 0.18s;
 }
-.qty-input::-webkit-inner-spin-button,
-.qty-input::-webkit-outer-spin-button { -webkit-appearance: none; }
-.qty-input:focus { outline: none; background: var(--cream); }
+.qty-select:focus { outline: none; border-color: var(--gold); box-shadow: 0 0 0 3px rgba(201,149,42,0.15); }
+.qty-select:hover { border-color: var(--gold); }
 .row-total {
-  font-family: var(--serif); font-size: 14px; font-weight: 600;
-  color: var(--crimson); min-height: 18px; text-align: right; white-space: nowrap;
+  font-family: var(--serif); font-size: 15px; font-weight: 700;
+  color: var(--crimson); min-height: 20px; text-align: right; white-space: nowrap;
 }
 
-/* SUMMARY BAR */
+/* ─── SUMMARY BAR ─── */
 .summary-bar {
   position: fixed; bottom: 0; left: 0; right: 0; z-index: 200;
   background: var(--crimson); color: white;
   padding: 14px 24px;
   display: flex; align-items: center; justify-content: space-between; gap: 16px;
-  box-shadow: 0 -4px 24px rgba(0,0,0,0.22);
+  box-shadow: 0 -4px 24px rgba(0,0,0,0.25);
   transform: translateY(100%);
   transition: transform 0.3s cubic-bezier(0.4,0,0.2,1);
 }
 .summary-bar.visible { transform: translateY(0); }
-.summary-bar-info { display: flex; flex-direction: column; gap: 2px; }
+.summary-bar-info { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
 .summary-bar-label { font-size: 10px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); opacity: 0.85; }
 .summary-bar-total { font-family: var(--serif); font-size: 26px; font-weight: 600; line-height: 1; }
-.summary-bar-sub { font-size: 12px; opacity: 0.65; }
+.summary-bar-sub { font-size: 12px; opacity: 0.7; }
+.summary-bar-sub .vat-pill {
+  display: inline-block; background: rgba(201,149,42,0.25); color: var(--gold-lt);
+  font-size: 9.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 2px 7px; border-radius: 4px; margin-left: 6px;
+}
 .summary-bar-btn {
   background: var(--gold); color: var(--crimson);
   padding: 13px 28px; border-radius: 30px;
@@ -213,99 +255,116 @@ header {
 }
 .summary-bar-btn:hover { background: var(--gold-lt); transform: translateY(-1px); }
 
-/* DEPOSIT BLOCK */
-.deposit-block {
-  background: white; border-radius: var(--rad);
-  border: 1px solid rgba(201,149,42,0.25); padding: 24px 28px;
-  display: flex; gap: 18px; align-items: flex-start; box-shadow: var(--shadow);
-}
-.deposit-icon { font-size: 28px; flex-shrink: 0; margin-top: 2px; }
-.deposit-title { font-family: var(--serif); font-size: 18px; font-weight: 600; color: var(--crimson); margin-bottom: 6px; }
-.deposit-text { font-size: 13px; line-height: 1.75; color: var(--ink-60); }
-.deposit-text strong { color: var(--ink); }
-
-/* MODAL */
+/* ─── MODAL ─── */
 .overlay {
   position: fixed; inset: 0; z-index: 500;
-  background: rgba(26,18,8,0.7); backdrop-filter: blur(4px);
+  background: rgba(26,18,8,0.72); backdrop-filter: blur(4px);
   display: none; align-items: center; justify-content: center; padding: 16px;
 }
 .overlay.open { display: flex; animation: fIn 0.2s ease; }
 @keyframes fIn { from { opacity:0 } to { opacity:1 } }
 .modal {
   background: white; border-radius: 20px;
-  width: 100%; max-width: 600px; max-height: 90vh; overflow-y: auto;
-  box-shadow: 0 24px 80px rgba(0,0,0,0.25);
+  width: 100%; max-width: 620px; max-height: 92vh; overflow-y: auto;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.28);
   animation: sUp 0.28s cubic-bezier(0.4,0,0.2,1);
 }
 @keyframes sUp { from { transform: translateY(24px); opacity:0 } to { transform: translateY(0); opacity:1 } }
 .modal-top {
-  background: var(--crimson); padding: 24px 28px; color: var(--gold-pale);
+  background: var(--crimson); padding: 22px 28px; color: var(--gold-pale);
   display: flex; align-items: flex-start; justify-content: space-between;
-  position: sticky; top: 0;
+  position: sticky; top: 0; z-index: 1;
 }
 .modal-top h2 { font-family: var(--serif); font-size: 24px; font-weight: 600; }
-.modal-top p { font-size: 12px; opacity: 0.65; margin-top: 4px; }
-.modal-close { font-size: 22px; opacity: 0.55; transition: opacity 0.15s; padding: 0 2px; }
+.modal-top p { font-size: 12px; opacity: 0.7; margin-top: 4px; }
+.modal-close { font-size: 22px; opacity: 0.55; transition: opacity 0.15s; padding: 0 2px; color: var(--gold-pale); }
 .modal-close:hover { opacity: 1; }
-.modal-body { padding: 28px; }
+.modal-body { padding: 26px 28px; }
 .order-recap {
   background: var(--cream); border-radius: 10px;
-  padding: 16px 18px; margin-bottom: 24px; border: 1px solid var(--ink-15);
+  padding: 16px 18px; margin-bottom: 22px; border: 1px solid var(--ink-15);
 }
-.recap-title { font-size: 10px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+.recap-title { font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
 .recap-item {
   display: flex; justify-content: space-between; align-items: baseline;
   font-size: 13px; padding: 5px 0; border-bottom: 1px solid var(--ink-15);
 }
 .recap-item:last-of-type { border-bottom: none; }
+.recap-subtotal {
+  display: flex; justify-content: space-between; align-items: baseline;
+  font-size: 13px; padding: 5px 0; color: var(--ink-60);
+}
 .recap-total {
   display: flex; justify-content: space-between; align-items: baseline;
-  font-family: var(--serif); font-size: 20px; font-weight: 600; color: var(--crimson);
+  font-family: var(--serif); font-size: 20px; font-weight: 700; color: var(--crimson);
   margin-top: 12px; padding-top: 12px; border-top: 1.5px solid rgba(201,149,42,0.4);
 }
-.form-section-label { font-size: 10px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-60); margin-bottom: 14px; }
+.recap-vat-note {
+  font-size: 11px; color: var(--ink-60); margin-top: 6px; text-align: right;
+  font-style: italic;
+}
+.form-section-label { font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-60); margin-bottom: 12px; }
 .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
 .form-group { display: flex; flex-direction: column; gap: 5px; }
 .form-group.full { grid-column: 1 / -1; }
-.form-label { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-60); }
-.form-input, .form-textarea {
-  padding: 10px 13px; border: 1.5px solid var(--ink-15); border-radius: 8px;
+.form-label { font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-60); }
+.form-label .req { color: var(--crimson); }
+.form-input, .form-textarea, .form-select {
+  padding: 11px 13px; border: 1.5px solid var(--ink-15); border-radius: 8px;
   font-size: 14px; color: var(--ink); background: var(--cream);
   transition: border-color 0.18s, background 0.18s;
 }
-.form-input:focus, .form-textarea:focus { outline: none; border-color: var(--gold); background: white; }
-.form-textarea { resize: vertical; min-height: 72px; }
-.deposit-reminder {
-  background: rgba(201,149,42,0.1); border: 1px solid rgba(201,149,42,0.28);
-  border-radius: 8px; padding: 12px 14px;
-  font-size: 12.5px; line-height: 1.7; color: var(--ink-60); margin: 16px 0 20px;
+.form-input:focus, .form-textarea:focus, .form-select:focus { outline: none; border-color: var(--gold); background: white; }
+.form-textarea { resize: vertical; min-height: 70px; }
+.form-select { cursor: pointer; appearance: none; -webkit-appearance: none; background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'><path d='M1 1l4 4 4-4' stroke='%238B1A1A' stroke-width='1.5' fill='none' stroke-linecap='round'/></svg>"); background-repeat: no-repeat; background-position: right 12px center; padding-right: 32px; }
+.payment-reminder {
+  background: rgba(44,74,46,0.08); border: 1px solid rgba(44,74,46,0.25);
+  border-radius: 10px; padding: 14px 16px;
+  font-size: 12.5px; line-height: 1.7; color: var(--ink); margin: 16px 0 18px;
 }
-.deposit-reminder strong { color: var(--gold); }
+.payment-reminder strong { color: var(--forest); }
 .submit-btn {
-  width: 100%; padding: 15px;
-  background: linear-gradient(135deg, var(--crimson) 0%, #6A0E0E 100%);
+  width: 100%; padding: 16px;
+  background: linear-gradient(135deg, var(--crimson) 0%, var(--crimson-dk) 100%);
   color: white; border-radius: 10px;
-  font-size: 14px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+  font-size: 14px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
   box-shadow: 0 4px 18px rgba(139,26,26,0.32);
   transition: transform 0.2s, box-shadow 0.2s;
 }
-.submit-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(139,26,26,0.42); }
+.submit-btn:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(139,26,26,0.42); }
+.submit-btn:disabled { opacity: 0.6; cursor: wait; }
+.spinner {
+  display: inline-block; width: 14px; height: 14px; border: 2px solid rgba(255,255,255,0.3);
+  border-top-color: white; border-radius: 50%;
+  animation: spin 0.8s linear infinite; vertical-align: middle; margin-right: 8px;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
 
-/* SUCCESS */
+/* ─── SUCCESS ─── */
 .success-top {
   background: linear-gradient(135deg, var(--forest) 0%, #1A2E1C 100%);
   padding: 36px 28px; text-align: center; color: var(--cream);
 }
 .success-icon { font-size: 52px; margin-bottom: 14px; }
 .success-top h2 { font-family: var(--serif); font-size: 28px; font-weight: 500; color: var(--gold-lt); margin-bottom: 8px; }
-.success-top p { font-size: 13px; opacity: 0.72; }
+.success-top p { font-size: 13px; opacity: 0.78; max-width: 460px; margin: 0 auto; }
 .success-body { padding: 28px; }
+
+.next-steps-box {
+  background: var(--cream); border-radius: 12px; padding: 18px 20px;
+  border: 1px solid var(--ink-15); margin-bottom: 22px;
+}
+.next-steps-title { font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; }
+.next-step { display: flex; gap: 12px; align-items: flex-start; padding: 8px 0; }
+.next-step-icon { font-size: 22px; flex-shrink: 0; width: 32px; text-align: center; }
+.next-step-text { font-size: 13px; line-height: 1.6; color: var(--ink); }
+.next-step-text strong { font-family: var(--serif); font-size: 14.5px; display: block; margin-bottom: 2px; color: var(--crimson); }
+
 .summary-block {
   background: var(--cream); border-radius: 10px; border: 1px solid var(--ink-15);
-  padding: 18px; font-family: 'Courier New', monospace; font-size: 12px;
-  line-height: 1.85; white-space: pre-wrap; margin-bottom: 20px;
-  max-height: 280px; overflow-y: auto;
+  padding: 16px; font-family: 'Courier New', monospace; font-size: 11.5px;
+  line-height: 1.85; white-space: pre-wrap; margin-bottom: 18px;
+  max-height: 260px; overflow-y: auto;
 }
 .action-row { display: flex; gap: 10px; flex-wrap: wrap; }
 .act-btn {
@@ -314,38 +373,44 @@ header {
   display: flex; align-items: center; justify-content: center; gap: 7px; transition: all 0.2s;
 }
 .act-btn.red { background: var(--crimson); color: white; }
-.act-btn.red:hover { background: #A52A2A; }
+.act-btn.red:hover { background: var(--crimson-dk); }
 .act-btn.green { background: #25D366; color: white; }
 .act-btn.green:hover { background: #1ebe5b; }
 .act-btn.muted { background: var(--cream-dk); color: var(--ink); border: 1.5px solid var(--ink-15); }
 .act-btn.muted:hover { border-color: var(--gold); background: var(--cream); }
 
-/* TOAST */
+/* ─── TOAST ─── */
 .toast {
-  position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%) translateY(8px);
+  position: fixed; bottom: 90px; left: 50%; transform: translateX(-50%) translateY(8px);
   background: var(--forest); color: white;
-  padding: 10px 22px; border-radius: 30px;
+  padding: 11px 22px; border-radius: 30px;
   font-size: 13px; font-weight: 500;
   opacity: 0; pointer-events: none; z-index: 9999;
-  transition: all 0.28s ease; white-space: nowrap;
+  transition: all 0.28s ease; white-space: nowrap; max-width: 92vw;
 }
 .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+.toast.error { background: var(--crimson); }
 
-/* FOOTER */
+/* ─── FOOTER ─── */
 footer { background: var(--ink); color: var(--cream); padding: 36px 24px; text-align: center; }
-.footer-name { font-family: var(--serif); font-size: 22px; color: var(--gold-lt); margin-bottom: 8px; }
-.footer-details { font-size: 12.5px; opacity: 0.45; line-height: 2; }
-.footer-melegatti { margin-top: 14px; font-size: 11.5px; opacity: 0.35; }
+.footer-name { font-family: var(--serif); font-size: 22px; color: var(--gold-lt); margin-bottom: 8px; letter-spacing: 0.03em; }
+.footer-details { font-size: 12.5px; opacity: 0.55; line-height: 2; }
+.footer-details a { color: var(--gold-lt); text-decoration: none; }
+.footer-melegatti { margin-top: 14px; font-size: 11.5px; opacity: 0.4; }
 .footer-melegatti a { color: var(--gold); text-decoration: none; opacity: 1; }
 
-/* RESPONSIVE */
-@media (max-width: 640px) {
+/* ─── RESPONSIVE ─── */
+@media (max-width: 720px) {
+  header { height: 64px; padding: 0 16px; }
+  .logo-link { height: 44px; }
   .melegatti-link { display: none; }
+  .cart-pill { padding: 8px 14px; font-size: 11px; }
+  .process-steps { grid-template-columns: 1fr; gap: 14px; }
   .product-row { grid-template-columns: 90px 1fr; grid-template-rows: auto auto; }
   .product-img { width: 90px; height: 90px; grid-row: 1 / 3; }
-  .product-qty-col { grid-column: 2; padding: 0 16px 14px; flex-direction: row; align-items: center; gap: 12px; }
+  .product-qty-col { grid-column: 2; padding: 0 16px 14px; flex-direction: row; align-items: center; justify-content: space-between; gap: 12px; }
   .qty-label { display: none; }
-  .summary-bar { flex-direction: column; gap: 10px; padding: 16px 20px 20px; }
+  .summary-bar { flex-direction: column; gap: 10px; padding: 14px 18px 18px; }
   .summary-bar-btn { width: 100%; text-align: center; padding: 14px; }
   .form-grid { grid-template-columns: 1fr; }
   .action-row { flex-direction: column; }
@@ -358,51 +423,85 @@ footer { background: var(--ink); color: var(--cream); padding: 36px 24px; text-a
 <div class="toast" id="toast"></div>
 
 <header>
-  <a href="#" class="logo">
-    <div class="logo-mark">FR</div>
-    <span class="logo-name">Foodroute</span>
+  <a href="#" class="logo-link">
+    <img src="data:image/png;base64,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" alt="Foodroute — Food Service Solutions">
   </a>
   <div class="header-right">
     <a href="https://www.melegatti.it/en/" target="_blank" rel="noopener" class="melegatti-link">Melegatti Official &rarr;</a>
-    <div class="cart-pill" onclick="openModal()">
-      &#128722; Pre-Order
-      <span class="cart-count" id="cartCount">0</span>
-    </div>
+    <button class="cart-pill" onclick="openModal()">
+      &#128722; Pre-Order <span class="cart-count" id="cartCount">0</span>
+    </button>
   </div>
 </header>
 
 <div class="hero">
-  <div class="hero-tag">&#127470;&#127481; Christmas 2025 &mdash; Limited Allocation</div>
-  <h1>Melegatti Panettone<br><em>Pre-Order Form</em></h1>
-  <p>Select your cartons below, review your order, and submit. A Foodroute representative will confirm your allocation and deposit within 1&ndash;2 business days.</p>
+  <div class="hero-tag">&#127470;&#127481; Christmas 2026 &mdash; Pre-Order Now Open</div>
+  <h1>Melegatti Panettone<br><em>&amp; Pandoro Collection</em></h1>
+  <p>Authentic Italian Christmas cakes, imported by Foodroute. Reserve your stock for the 2026 festive season &mdash; secure your cakes today.</p>
+  <div class="deadline-banner">&#9201; Pre-Orders Close Friday, 19 June 2026</div>
+  <div class="region-line">Available to Johannesburg &middot; Pretoria &middot; Durban</div>
   <a href="#products" class="hero-cta">Start Your Order &darr;</a>
 </div>
 
 <div class="page-body">
-  <div id="products">
-    <div class="section-head">
-      <h2>Select Your Cartons</h2>
-      <div class="section-head-line"></div>
-    </div>
-    <div class="product-list" id="productList"></div>
-  </div>
 
-  <div class="deposit-block">
-    <div class="deposit-icon">&#128274;</div>
-    <div>
-      <div class="deposit-title">Deposit Secures Your Allocation</div>
-      <div class="deposit-text">
-        Submitting this form is a <strong>non-binding pre-order</strong>. A Foodroute representative will send you a formal invoice. A <strong>deposit (approx. 30&ndash;50%)</strong> is required within 5 business days to lock in your cartons and price. Balance is due before dispatch. Christmas delivery.
+  <!-- HOW IT WORKS -->
+  <div class="process-box">
+    <div class="process-title">How Your Pre-Order Works</div>
+    <div class="process-steps">
+      <div class="process-step">
+        <div class="step-num">1</div>
+        <div class="step-body"><strong>Submit</strong>Select your items below and submit your details. You&rsquo;ll receive an email confirmation immediately.</div>
+      </div>
+      <div class="process-step">
+        <div class="step-num">2</div>
+        <div class="step-body"><strong>Confirm</strong>Foodroute will send a WhatsApp confirming receipt of your order, with payment arrangements.</div>
+      </div>
+      <div class="process-step">
+        <div class="step-num">3</div>
+        <div class="step-body"><strong>Delivery</strong>Your Melegatti stock is delivered direct to your door in December, in time for Christmas.</div>
       </div>
     </div>
   </div>
+
+  <!-- VAT BANNER -->
+  <div class="vat-banner">
+    <span class="vat-banner-icon">&#9888;&#65039;</span>
+    <span>All prices shown are <strong>EXCLUDING VAT</strong>. VAT at 15% will be added. Formal invoice to follow.</span>
+  </div>
+
+  <!-- PRODUCTS -->
+  <div id="products">
+    <div class="section-head">
+      <h2>Select Your Items</h2>
+      <div class="section-head-line"></div>
+    </div>
+    <div class="product-list" id="productList" style="margin-top:20px"></div>
+  </div>
+
+  <!-- DEADLINE / OFFER BOX -->
+  <div class="process-box" style="background: linear-gradient(135deg, #FFF7E0 0%, #FBF0CB 100%); border: 1.5px solid var(--gold);">
+    <div class="process-title" style="color: var(--crimson)">Important Information</div>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 22px; font-size: 13px; line-height: 1.65; color: var(--ink);">
+      <div>
+        <strong style="font-family: var(--serif); font-size: 16px; color: var(--crimson); display:block; margin-bottom:6px;">&#9201; Pre-Order Deadline</strong>
+        All pre-orders must be received by <strong>Friday, 19 June 2026</strong> to secure your stock and pricing. Orders received after this date cannot be guaranteed.
+      </div>
+      <div>
+        <strong style="font-family: var(--serif); font-size: 16px; color: var(--crimson); display:block; margin-bottom:6px;">&#128205; Delivery Areas</strong>
+        This offer is available to <strong>Johannesburg, Pretoria and Durban</strong> customers only. December 2026 delivery direct to your premises.
+      </div>
+    </div>
+  </div>
+
 </div>
 
+<!-- STICKY SUMMARY BAR -->
 <div class="summary-bar" id="summaryBar">
   <div class="summary-bar-info">
-    <div class="summary-bar-label">Your Pre-Order Total</div>
+    <div class="summary-bar-label">Your Pre-Order Total (incl. VAT)</div>
     <div class="summary-bar-total" id="barTotal">R0.00</div>
-    <div class="summary-bar-sub" id="barSub">0 cartons selected</div>
+    <div class="summary-bar-sub" id="barSub">0 items selected <span class="vat-pill">excl. VAT</span></div>
   </div>
   <button class="summary-bar-btn" onclick="openModal()">Review &amp; Submit &rarr;</button>
 </div>
@@ -412,8 +511,8 @@ footer { background: var(--ink); color: var(--cream); padding: 36px 24px; text-a
   <div class="modal">
     <div class="modal-top">
       <div>
-        <h2>Your Pre-Order</h2>
-        <p>Review and enter your details to submit</p>
+        <h2>Complete Your Pre-Order</h2>
+        <p>Review your selection and enter your details</p>
       </div>
       <button class="modal-close" onclick="closeModal()">&times;</button>
     </div>
@@ -422,34 +521,47 @@ footer { background: var(--ink); color: var(--cream); padding: 36px 24px; text-a
       <div class="form-section-label">Your Details</div>
       <div class="form-grid">
         <div class="form-group">
-          <label class="form-label">Company Name</label>
+          <label class="form-label">Company Name <span class="req">*</span></label>
           <input class="form-input" id="f_company" type="text" placeholder="Acme Retail (Pty) Ltd">
         </div>
         <div class="form-group">
-          <label class="form-label">Contact Person *</label>
+          <label class="form-label">Contact Person <span class="req">*</span></label>
           <input class="form-input" id="f_contact" type="text" placeholder="Jane Smith">
         </div>
         <div class="form-group">
-          <label class="form-label">Email *</label>
+          <label class="form-label">Email <span class="req">*</span></label>
           <input class="form-input" id="f_email" type="email" placeholder="jane@company.co.za">
         </div>
         <div class="form-group">
-          <label class="form-label">Phone / WhatsApp *</label>
-          <input class="form-input" id="f_phone" type="tel" placeholder="+27 81 234 5678">
+          <label class="form-label">Phone / WhatsApp <span class="req">*</span></label>
+          <input class="form-input" id="f_phone" type="tel" placeholder="081 234 5678">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Delivery City <span class="req">*</span></label>
+          <select class="form-select" id="f_city">
+            <option value="">Select a city...</option>
+            <option value="Johannesburg">Johannesburg</option>
+            <option value="Pretoria">Pretoria</option>
+            <option value="Durban">Durban</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Postcode</label>
+          <input class="form-input" id="f_postcode" type="text" placeholder="2196">
         </div>
         <div class="form-group full">
           <label class="form-label">Delivery Address</label>
-          <input class="form-input" id="f_address" type="text" placeholder="123 Main Rd, Sandton, 2196">
+          <input class="form-input" id="f_address" type="text" placeholder="123 Main Rd, Sandton">
         </div>
         <div class="form-group full">
           <label class="form-label">Notes</label>
-          <textarea class="form-textarea" id="f_notes" placeholder="Delivery requirements, split orders, preferred date&hellip;"></textarea>
+          <textarea class="form-textarea" id="f_notes" placeholder="Delivery preferences, split orders, special instructions&hellip;"></textarea>
         </div>
       </div>
-      <div class="deposit-reminder">
-        &#128179; <strong>Deposit required to confirm.</strong> This is a non-binding pre-order. A formal invoice with deposit instructions (approx. 30&ndash;50%) will follow within 1&ndash;2 business days.
+      <div class="payment-reminder">
+        &#128231; <strong>What happens next?</strong> You&rsquo;ll receive an order confirmation email immediately upon submission. Our office will then send you a WhatsApp confirming receipt, along with payment arrangements for December delivery.
       </div>
-      <button class="submit-btn" onclick="submitOrder()">&#10022; Submit Pre-Order</button>
+      <button class="submit-btn" id="submitBtn" onclick="submitOrder()">Submit Pre-Order &rarr;</button>
     </div>
   </div>
 </div>
@@ -460,186 +572,385 @@ footer { background: var(--ink); color: var(--cream); padding: 36px 24px; text-a
     <div class="success-top">
       <div class="success-icon">&#127876;</div>
       <h2>Pre-Order Submitted!</h2>
-      <p>We&rsquo;ll be in touch within 1&ndash;2 business days with your invoice.</p>
+      <p>Thank you. A confirmation email has been sent &mdash; please check your inbox (and spam folder, just in case).</p>
     </div>
     <div class="success-body">
+      <div class="next-steps-box">
+        <div class="next-steps-title">What Happens Next</div>
+        <div class="next-step">
+          <div class="next-step-icon">&#128231;</div>
+          <div class="next-step-text"><strong>Email Confirmation (Immediate)</strong>You&rsquo;ll receive your order summary by email straight away.</div>
+        </div>
+        <div class="next-step">
+          <div class="next-step-icon">&#128241;</div>
+          <div class="next-step-text"><strong>WhatsApp from Office</strong>Once our team has received your order, we&rsquo;ll WhatsApp you with payment arrangements for December delivery.</div>
+        </div>
+        <div class="next-step">
+          <div class="next-step-icon">&#127876;</div>
+          <div class="next-step-text"><strong>December 2026 Delivery</strong>Your Melegatti stock arrives in time for Christmas, direct to your premises.</div>
+        </div>
+        <div class="next-step">
+          <div class="next-step-icon">&#9742;&#65039;</div>
+          <div class="next-step-text"><strong>Need to chat?</strong>Call our office on <a href="tel:0113924333" style="color: var(--crimson); font-weight: 700;">011 392 4333</a> for any questions.</div>
+        </div>
+      </div>
+      <div class="form-section-label">Order Summary</div>
       <div class="summary-block" id="summaryOut"></div>
       <div class="action-row">
         <button class="act-btn red" onclick="copyOrder()">&#128203; Copy Summary</button>
         <button class="act-btn green" onclick="whatsappOrder()">&#128172; WhatsApp Us</button>
-        <button class="act-btn muted" onclick="window.print()">&#128424; Print / PDF</button>
+        <button class="act-btn muted" onclick="window.print()">&#128424; Print</button>
       </div>
     </div>
   </div>
 </div>
 
 <footer>
-  <div class="footer-name">Foodroute</div>
+  <div class="footer-name">Foodroute &mdash; Food Service Solutions</div>
   <div class="footer-details">
-    orders@foodroute.co.za &nbsp;&middot;&nbsp; +27 (0)__ ___ ____<br>
-    Johannesburg, South Africa &nbsp;&middot;&nbsp; WhatsApp orders welcome
+    <a href="mailto:sales@foodroutejhb.co.za">sales@foodroutejhb.co.za</a>
+    &nbsp;&middot;&nbsp;
+    <a href="tel:0113924333">011 392 4333</a><br>
+    Johannesburg &middot; Pretoria &middot; Durban
   </div>
   <div class="footer-melegatti">
-    Official Melegatti importer &nbsp;&middot;&nbsp;
+    Official Melegatti importer &middot;
     <a href="https://www.melegatti.it/en/" target="_blank" rel="noopener">melegatti.it</a>
-    &nbsp;&middot;&nbsp; Est. Verona 1894
+    &middot; Est. Verona 1894
   </div>
 </footer>
 
 <script>
-// Product data — images read from hidden DOM elements (avoids base64-in-JS quoting issues)
-var PRODUCTS = [
-  { id: 'p1', name: 'Classic Pandoro',        size: '750 g', perCarton: 12, price: 2520 },
-  { id: 'p2', name: 'Classic Panettone',       size: '750 g', perCarton: 12, price: 2400 },
-  { id: 'p3', name: 'Pistachio Cream Pandoro', size: '750 g', perCarton: 12, price: 2840 },
-  { id: 'p4', name: 'Gianduja Pandoro',        size: '750 g', perCarton: 12, price: 2640 },
-];
+/* ════════════════════════════════════════════════════════════════
+   EMAILJS CONFIGURATION
+   ────────────────────────────────────────────────────────────────
+   To enable automated email sending:
+   1. Go to https://www.emailjs.com and create a free account
+   2. Connect your email service (Gmail, Outlook, etc.)
+   3. Create an email template (see template_id below for variables)
+   4. Get your PUBLIC KEY, SERVICE ID, and TEMPLATE ID
+   5. Replace the three values below
+   
+   Template should accept these variables:
+     {{customer_name}}, {{customer_email}}, {{company_name}},
+     {{customer_phone}}, {{delivery_city}}, {{delivery_address}},
+     {{order_items}}, {{order_total}}, {{notes}}, {{order_date}}
+   
+   The "To" field of the template should be: {{customer_email}}
+   The "CC" field of the template should be: sales@foodroutejhb.co.za
+   ════════════════════════════════════════════════════════════════ */
+var EMAILJS_PUBLIC_KEY  = "YOUR_PUBLIC_KEY_HERE";
+var EMAILJS_SERVICE_ID  = "YOUR_SERVICE_ID_HERE";
+var EMAILJS_TEMPLATE_ID = "YOUR_TEMPLATE_ID_HERE";
 
+/* WhatsApp number that customers can message (no + or spaces) */
+var WHATSAPP_NUMBER = "27113924333";
+
+/* GitHub image base URL */
+var IMG_BASE = "https://raw.githubusercontent.com/custodiaprojects/foodroutechristmas/main/";
+
+/* Initialise EmailJS if a real key was set */
+var EMAILJS_READY = false;
+if (typeof emailjs !== "undefined" && EMAILJS_PUBLIC_KEY && EMAILJS_PUBLIC_KEY.indexOf("YOUR_") !== 0) {
+  try { emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY }); EMAILJS_READY = true; }
+  catch(e) { console.warn("EmailJS init failed:", e); }
+}
+
+/* ── PRODUCTS ── */
+var PRODUCTS = [{"id": "p1", "img": "P1.png", "name": "Classic Pandoro", "size": "750 g", "perCarton": 12, "price": 185.5}, {"id": "p2", "img": "P2.png", "name": "Classic Panettone", "size": "750 g", "perCarton": 12, "price": 157.9}, {"id": "p3", "img": "P3.png", "name": "Pistachio Cream Pandoro", "size": "750 g", "perCarton": 12, "price": 232.5}, {"id": "p4", "img": "P4.png", "name": "Gianduja Pandoro", "size": "750 g", "perCarton": 12, "price": 218.0}, {"id": "p5", "img": "P5.png", "name": "Tiramisù Pandoro", "size": "750 g", "perCarton": 12, "price": 209.5}, {"id": "p6", "img": "P6.png", "name": "Limoncello di Capri Pandoro", "size": "750 g", "perCarton": 12, "price": 209.5}, {"id": "p7", "img": "P7.png", "name": "Classic Mini Panettoncino", "size": "100 g", "perCarton": 36, "price": 35.5}, {"id": "p8", "img": "P8.png", "name": "Choco Chips Panettone", "size": "750 g", "perCarton": 12, "price": 201.5}];
+
+/* Image fallback emojis (when GitHub image is missing) */
+var FALLBACK_EMOJI = { p1:"⭐", p2:"🎄", p3:"🌿", p4:"🍫", p5:"🍰", p6:"🍋", p7:"🎁", p8:"🍫" };
+
+/* ── STATE ── */
 var qty = {};
 PRODUCTS.forEach(function(p) { qty[p.id] = 0; });
 
+/* ── FORMAT ── */
 function fmt(n) {
-  return 'R ' + n.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  return "R\u202F" + n.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
+/* ── BUILD QTY <option> LIST 0..1000 ── */
+function buildOptions() {
+  var out = '<option value="0">0</option>';
+  for (var i = 1; i <= 1000; i++) out += '<option value="' + i + '">' + i + '</option>';
+  return out;
+}
+var OPTIONS_HTML = buildOptions();
+
+/* ── IMAGE FALLBACK ── if a GitHub image is missing, swap to emoji placeholder */
+function handleImgError(imgEl, productId) {
+  var emoji = FALLBACK_EMOJI[productId] || "🎄";
+  var div = document.createElement("div");
+  div.className = "product-img fallback";
+  div.textContent = emoji;
+  imgEl.parentNode.replaceChild(div, imgEl);
+}
+
+/* ── RENDER PRODUCT ROWS ── */
 function renderProducts() {
-  var list = document.getElementById('productList');
-  list.innerHTML = PRODUCTS.map(function(p) {
-    var imgSrc = document.getElementById('img-' + p.id).src;
-    return '<div class="product-row" id="row-' + p.id + '">'
-      + '<img class="product-img" src="' + imgSrc + '" alt="' + p.name + '">'
-      + '<div class="product-info">'
-      +   '<div class="product-name">' + p.name + '</div>'
-      +   '<div class="product-meta">Melegatti &middot; ' + p.size + ' &middot; ' + p.perCarton + ' cakes per carton</div>'
-      +   '<div class="product-price-row">'
-      +     '<div class="price-carton">' + fmt(p.price) + '<span style="font-size:13px;font-weight:400;color:var(--ink-60)"> / carton</span></div>'
-      +     '<div class="price-unit">&asymp; <strong>' + fmt(p.price / p.perCarton) + '</strong> per cake</div>'
-      +   '</div>'
-      + '</div>'
-      + '<div class="product-qty-col">'
-      +   '<div class="qty-label">Cartons</div>'
-      +   '<div class="qty-wrap">'
-      +     '<button class="qty-btn" onclick="change(\u0027' + p.id + '\u0027,-1)">&minus;</button>'
-      +     '<input class="qty-input" type="number" id="qty-' + p.id + '" value="0" min="0" onchange="set(\u0027' + p.id + '\u0027,this.value)">'
-      +     '<button class="qty-btn" onclick="change(\u0027' + p.id + '\u0027,1)">+</button>'
-      +   '</div>'
-      +   '<div class="row-total" id="rtotal-' + p.id + '"></div>'
-      + '</div>'
-      + '</div>';
-  }).join('');
+  var list = document.getElementById("productList");
+  var QUOTE = String.fromCharCode(39); /* ' */
+  var html = "";
+  for (var i = 0; i < PRODUCTS.length; i++) {
+    var p = PRODUCTS[i];
+    var imgUrl = IMG_BASE + p.img;
+    html += '<div class="product-row" id="row-' + p.id + '">'
+      +    '<img class="product-img" src="' + imgUrl + '" alt="' + p.name + '" '
+      +    'onerror="handleImgError(this,' + QUOTE + p.id + QUOTE + ')">'
+      +    '<div class="product-info">'
+      +      '<div class="product-name">' + p.name + '</div>'
+      +      '<div class="product-meta">Melegatti &middot; ' + p.size + ' &middot; ' + p.perCarton + ' per carton</div>'
+      +      '<div class="product-price-row">'
+      +        '<div class="price-each">' + fmt(p.price) + '</div>'
+      +        '<div class="price-each-unit">per each</div>'
+      +        '<span class="vat-tag">Excl. VAT</span>'
+      +      '</div>'
+      +      '<div class="carton-hint">Full carton (' + p.perCarton + ') = ' + fmt(p.price * p.perCarton) + ' excl. VAT</div>'
+      +    '</div>'
+      +    '<div class="product-qty-col">'
+      +      '<div class="qty-label">Qty (eaches)</div>'
+      +      '<div class="qty-select-wrap">'
+      +        '<select class="qty-select" id="qty-' + p.id + '" onchange="setQty(' + QUOTE + p.id + QUOTE + ', this.value)">'
+      +          OPTIONS_HTML
+      +        '</select>'
+      +      '</div>'
+      +      '<div class="row-total" id="rtotal-' + p.id + '"></div>'
+      +    '</div>'
+      +  '</div>';
+  }
+  list.innerHTML = html;
 }
 
-function change(id, d) { apply(id, Math.max(0, (qty[id] || 0) + d)); }
-function set(id, v)    { apply(id, Math.max(0, parseInt(v) || 0)); }
-
-function apply(id, n) {
+/* ── QTY HANDLER ── */
+function setQty(id, v) {
+  var n = Math.max(0, Math.min(1000, parseInt(v) || 0));
   qty[id] = n;
-  document.getElementById('qty-' + id).value = n;
-  var p   = PRODUCTS.filter(function(x) { return x.id === id; })[0];
-  var rt  = document.getElementById('rtotal-' + id);
-  var row = document.getElementById('row-' + id);
-  if (n > 0) { rt.textContent = fmt(p.price * n); row.classList.add('has-qty'); }
-  else        { rt.textContent = '';               row.classList.remove('has-qty'); }
+  var p = null;
+  for (var i = 0; i < PRODUCTS.length; i++) if (PRODUCTS[i].id === id) { p = PRODUCTS[i]; break; }
+  var rt = document.getElementById("rtotal-" + id);
+  var row = document.getElementById("row-" + id);
+  if (n > 0) { rt.textContent = fmt(p.price * n); row.classList.add("has-qty"); }
+  else        { rt.textContent = ""; row.classList.remove("has-qty"); }
   updateBar();
 }
 
+/* ── TOTALS ── */
 function totals() {
-  var total = 0, cartons = 0;
-  PRODUCTS.forEach(function(p) { total += p.price * (qty[p.id] || 0); cartons += qty[p.id] || 0; });
-  return { total: total, cartons: cartons };
+  var total = 0, items = 0;
+  PRODUCTS.forEach(function(p) {
+    total += p.price * (qty[p.id] || 0);
+    items += qty[p.id] || 0;
+  });
+  return { total: total, items: items };
 }
 
 function updateBar() {
   var t = totals();
-  document.getElementById('barTotal').textContent = fmt(t.total);
-  document.getElementById('barSub').textContent   = t.cartons + ' carton' + (t.cartons !== 1 ? 's' : '') + ' · ' + (t.cartons * 12) + ' cakes';
-  var bar = document.getElementById('summaryBar');
-  var cc  = document.getElementById('cartCount');
-  if (t.cartons > 0) { bar.classList.add('visible'); cc.style.display = 'flex'; cc.textContent = t.cartons; }
-  else               { bar.classList.remove('visible'); cc.style.display = 'none'; }
+  var inclTotal = t.total * 1.15;
+  document.getElementById("barTotal").textContent = fmt(inclTotal);
+  document.getElementById("barSub").innerHTML = t.items + " item" + (t.items !== 1 ? "s" : "") + " &middot; " + fmt(t.total) + ' excl. VAT <span class="vat-pill">+ 15% VAT</span>';
+  var bar = document.getElementById("summaryBar");
+  var cc = document.getElementById("cartCount");
+  if (t.items > 0) { bar.classList.add("visible"); cc.style.display = "flex"; cc.textContent = t.items > 99 ? "99+" : t.items; }
+  else             { bar.classList.remove("visible"); cc.style.display = "none"; }
 }
 
+/* ── MODAL ── */
 function openModal() {
   var t = totals();
-  if (t.cartons === 0) { showToast('Select at least one carton first.'); return; }
-  var items = PRODUCTS.filter(function(p) { return qty[p.id] > 0; });
-  var html  = '<div class="recap-title">&#128230; Order Summary</div>';
-  items.forEach(function(p) {
-    html += '<div class="recap-item"><span>' + p.name + ' &times; ' + qty[p.id] + ' ctn</span><span>' + fmt(p.price * qty[p.id]) + '</span></div>';
+  if (t.items === 0) { showToast("Please select at least one item first.", true); return; }
+  var html = '<div class="recap-title">&#128230; Order Summary</div>';
+  PRODUCTS.forEach(function(p) {
+    if (qty[p.id] > 0) {
+      html += '<div class="recap-item"><span>' + p.name + ' &times; ' + qty[p.id] + '</span><span>' + fmt(p.price * qty[p.id]) + '</span></div>';
+    }
   });
-  html += '<div class="recap-total"><span>Total</span><span>' + fmt(t.total) + '</span></div>';
-  document.getElementById('orderRecap').innerHTML = html;
-  document.getElementById('checkoutOverlay').classList.add('open');
+  var vatAmount = t.total * 0.15;
+  var inclTotal = t.total + vatAmount;
+  html += '<div class="recap-subtotal"><span>Subtotal (excl. VAT)</span><span>' + fmt(t.total) + '</span></div>';
+  html += '<div class="recap-subtotal"><span>VAT @ 15%</span><span>' + fmt(vatAmount) + '</span></div>';
+  html += '<div class="recap-total"><span>Total (incl. VAT)</span><span>' + fmt(inclTotal) + '</span></div>';
+  html += '<div class="recap-vat-note">Formal invoice to follow</div>';
+  document.getElementById("orderRecap").innerHTML = html;
+  document.getElementById("checkoutOverlay").classList.add("open");
 }
-function closeModal() { document.getElementById('checkoutOverlay').classList.remove('open'); }
+function closeModal() { document.getElementById("checkoutOverlay").classList.remove("open"); }
+function closeSuccess() { document.getElementById("successOverlay").classList.remove("open"); }
 
-document.addEventListener('click', function(e) {
-  if (e.target === document.getElementById('checkoutOverlay')) closeModal();
-  if (e.target === document.getElementById('successOverlay'))  document.getElementById('successOverlay').classList.remove('open');
+document.addEventListener("click", function(e) {
+  if (e.target === document.getElementById("checkoutOverlay")) closeModal();
+  if (e.target === document.getElementById("successOverlay")) closeSuccess();
 });
 
-function submitOrder() {
-  var contact = document.getElementById('f_contact').value.trim();
-  var email   = document.getElementById('f_email').value.trim();
-  var phone   = document.getElementById('f_phone').value.trim();
-  if (!contact) { showToast('Please enter a contact name.'); return; }
-  if (!email)   { showToast('Please enter an email address.'); return; }
-  if (!phone)   { showToast('Please enter a phone number.'); return; }
-
-  var company = document.getElementById('f_company').value.trim() || '—';
-  var address = document.getElementById('f_address').value.trim() || '—';
-  var notes   = document.getElementById('f_notes').value.trim()   || '—';
-  var t       = totals();
-  var items   = PRODUCTS.filter(function(p) { return qty[p.id] > 0; });
-  var date    = new Date().toLocaleDateString('en-ZA', { day:'2-digit', month:'long', year:'numeric' });
-
-  var line = '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━';
-  var thin = '───────────────────────────────';
-  var s = line + '\nFOODROUTE × MELEGATTI\nCHRISTMAS 2025 PRE-ORDER\n' + line + '\nDate:     ' + date
-        + '\n\nCUSTOMER\n' + thin
-        + '\nCompany:  ' + company
-        + '\nContact:  ' + contact
-        + '\nEmail:    ' + email
-        + '\nPhone:    ' + phone
-        + '\nAddress:  ' + address
-        + '\nNotes:    ' + notes
-        + '\n\nORDER\n' + thin + '\n';
-  items.forEach(function(p) {
+/* ── BUILD SUMMARY STRING ── */
+function buildSummary(d) {
+  var t = totals();
+  var line = "═══════════════════════════════════════════";
+  var thin = "───────────────────────────────────────────";
+  var s = line + "\n";
+  s += "  FOODROUTE × MELEGATTI\n";
+  s += "  CHRISTMAS 2026 PRE-ORDER\n";
+  s += line + "\n";
+  s += "Date:     " + d.date + "\n\n";
+  s += "CUSTOMER\n" + thin + "\n";
+  s += "Company:  " + d.company + "\n";
+  s += "Contact:  " + d.contact + "\n";
+  s += "Email:    " + d.email + "\n";
+  s += "Phone:    " + d.phone + "\n";
+  s += "City:     " + d.city + "\n";
+  s += "Address:  " + d.address + "\n";
+  s += "Postcode: " + d.postcode + "\n";
+  if (d.notes) s += "Notes:    " + d.notes + "\n";
+  s += "\nORDER\n" + thin + "\n";
+  PRODUCTS.forEach(function(p) {
     var q = qty[p.id];
-    s += p.name + ' (' + p.size + ')\n  ' + q + ' carton' + (q!==1?'s':'') + ' × ' + fmt(p.price) + ' = ' + fmt(p.price*q) + '\n  (' + (q*p.perCarton) + ' cakes)\n\n';
+    if (q > 0) {
+      s += p.name + " (" + p.size + ")\n";
+      s += "  " + q + " each × " + fmt(p.price) + " = " + fmt(p.price * q) + "\n\n";
+    }
   });
-  s += thin + '\nTOTAL CARTONS: ' + t.cartons + '\nORDER TOTAL:   ' + fmt(t.total)
-     + '\n' + thin
-     + '\nDeposit (~30-50%) required to confirm.'
-     + '\nInvoice to follow within 1-2 business days.'
-     + '\n\nFoodroute | orders@foodroute.co.za'
-     + '\n+27 (0)__ ___ ____ | WhatsApp welcome'
-     + '\nmelegatti.it/en — Verona, Italy, Est. 1894'
-     + '\n' + line;
-
-  window._summary = s;
-  document.getElementById('summaryOut').textContent = s;
-  document.getElementById('checkoutOverlay').classList.remove('open');
-  document.getElementById('successOverlay').classList.add('open');
+  s += thin + "\n";
+  s += "TOTAL ITEMS:   " + t.items + "\n\n";
+  var vatAmt = t.total * 0.15;
+  var inclTotal = t.total + vatAmt;
+  s += "Subtotal (excl. VAT):  " + fmt(t.total) + "\n";
+  s += "VAT @ 15%:             " + fmt(vatAmt) + "\n";
+  s += "                       " + thin.substring(0,23) + "\n";
+  s += "TOTAL (incl. VAT):     " + fmt(inclTotal) + "\n";
+  s += thin + "\n";
+  s += "Formal invoice to follow.\n\n";
+  s += "* Pre-orders close Friday, 19 June 2026\n";
+  s += "* Delivery December 2026, JHB/PTA/DBN\n";
+  s += "* Payment arrangements via WhatsApp from\n";
+  s += "  Foodroute office after order receipt.\n\n";
+  s += "Foodroute Food Service Solutions\n";
+  s += "sales@foodroutejhb.co.za | 011 392 4333\n";
+  s += line;
+  return s;
 }
 
+/* ── BUILD ITEMS LIST FOR EMAIL ── */
+function buildItemsForEmail() {
+  var rows = [];
+  PRODUCTS.forEach(function(p) {
+    var q = qty[p.id];
+    if (q > 0) {
+      rows.push(p.name + " (" + p.size + ") — " + q + " each × " + fmt(p.price) + " = " + fmt(p.price * q));
+    }
+  });
+  return rows.join("\n");
+}
+
+/* ── SUBMIT ── */
+function submitOrder() {
+  var contact = document.getElementById("f_contact").value.trim();
+  var email   = document.getElementById("f_email").value.trim();
+  var phone   = document.getElementById("f_phone").value.trim();
+  var city    = document.getElementById("f_city").value;
+  if (!contact)        { showToast("Please enter a contact name.", true); return; }
+  if (!email || !/\S+@\S+\.\S+/.test(email)) { showToast("Please enter a valid email address.", true); return; }
+  if (!phone)          { showToast("Please enter a phone number.", true); return; }
+  if (!city)           { showToast("Please select a delivery city.", true); return; }
+
+  var data = {
+    company:  document.getElementById("f_company").value.trim() || "—",
+    contact:  contact,
+    email:    email,
+    phone:    phone,
+    city:     city,
+    address:  document.getElementById("f_address").value.trim() || "—",
+    postcode: document.getElementById("f_postcode").value.trim() || "—",
+    notes:    document.getElementById("f_notes").value.trim() || "",
+    date:     new Date().toLocaleDateString("en-ZA", { day:"2-digit", month:"long", year:"numeric" }),
+  };
+
+  var summary = buildSummary(data);
+  window._summary = summary;
+  window._customerEmail = email;
+
+  var btn = document.getElementById("submitBtn");
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span> Sending&hellip;';
+
+  var t = totals();
+  var templateParams = {
+    customer_name:    contact,
+    customer_email:   email,
+    company_name:     data.company,
+    customer_phone:   phone,
+    delivery_city:    city,
+    delivery_address: data.address + (data.postcode !== "—" ? ", " + data.postcode : ""),
+    order_items:      buildItemsForEmail(),
+    order_total:      fmt(t.total) + " excl. VAT + " + fmt(t.total * 0.15) + " VAT = " + fmt(t.total * 1.15) + " incl. VAT",
+    notes:            data.notes || "(none)",
+    order_date:       data.date,
+    cc_email:         "sales@foodroutejhb.co.za",
+  };
+
+  function showSuccess() {
+    document.getElementById("summaryOut").textContent = summary;
+    document.getElementById("checkoutOverlay").classList.remove("open");
+    document.getElementById("successOverlay").classList.add("open");
+    btn.disabled = false;
+    btn.innerHTML = "Submit Pre-Order &rarr;";
+  }
+
+  if (EMAILJS_READY) {
+    emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams)
+      .then(function() { showSuccess(); })
+      .catch(function(err) {
+        console.error("EmailJS error:", err);
+        showToast("Email could not be sent automatically — opening your email client as backup.", true);
+        openMailtoFallback(data, summary);
+        showSuccess();
+      });
+  } else {
+    /* No EmailJS configured — use mailto: fallback */
+    openMailtoFallback(data, summary);
+    showSuccess();
+  }
+}
+
+/* ── MAILTO FALLBACK ── */
+function openMailtoFallback(d, summary) {
+  var subject = "Foodroute Christmas 2026 Pre-Order — " + (d.company !== "—" ? d.company : d.contact);
+  var body = "Hi " + d.contact + ",\n\n"
+    + "Thank you for your Foodroute × Melegatti Christmas 2026 pre-order. Below is your order summary.\n\n"
+    + "Our office has received your order and will be in touch via WhatsApp shortly with payment arrangements for December delivery.\n\n"
+    + "If you have any questions, please call us on 011 392 4333 or reply to this email.\n\n"
+    + summary
+    + "\n\nKind regards,\nFoodroute Sales Team\nsales@foodroutejhb.co.za\n011 392 4333";
+  var url = "mailto:" + d.email + "?cc=sales@foodroutejhb.co.za"
+    + "&subject=" + encodeURIComponent(subject)
+    + "&body=" + encodeURIComponent(body);
+  /* Use setTimeout to keep modal flow smooth */
+  setTimeout(function() { window.location.href = url; }, 200);
+}
+
+/* ── ACTION BUTTONS ── */
 function copyOrder() {
-  navigator.clipboard.writeText(window._summary || '')
-    .then(function() { showToast('Summary copied!'); })
-    .catch(function() { showToast('Please select and copy manually.'); });
+  if (!navigator.clipboard) { showToast("Please select the text and copy manually.", true); return; }
+  navigator.clipboard.writeText(window._summary || "")
+    .then(function() { showToast("Summary copied to clipboard!"); })
+    .catch(function() { showToast("Copy failed — select and copy manually.", true); });
 }
 function whatsappOrder() {
-  var num = '27000000000'; // replace with your number
-  window.open('https://wa.me/' + num + '?text=' + encodeURIComponent(window._summary || ''), '_blank');
+  window.open("https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(window._summary || ""), "_blank");
 }
 
-function showToast(msg) {
-  var t = document.getElementById('toast');
-  t.textContent = msg; t.classList.add('show');
+/* ── TOAST ── */
+function showToast(msg, isError) {
+  var t = document.getElementById("toast");
+  t.textContent = msg;
+  t.classList.toggle("error", !!isError);
+  t.classList.add("show");
   clearTimeout(window._tt);
-  window._tt = setTimeout(function() { t.classList.remove('show'); }, 2800);
+  window._tt = setTimeout(function() { t.classList.remove("show"); }, 3500);
 }
 
+/* ── INIT ── */
 renderProducts();
 </script>
 </body>

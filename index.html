@@ -650,6 +650,9 @@ var EMAILJS_TEMPLATE_ID = "template_87h676d";
 /* WhatsApp number that customers can message (no + or spaces) */
 var WHATSAPP_NUMBER = "27113924333";
 
+/* Google Sheet webhook — paste your deployed Apps Script URL here */
+var SHEET_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbzr8VNDA_fzoGxDLmkNQetfCK2Z2IzohPTCn30PG-u5C2MzWDWXtzStYk020ruCvOI7/exec";
+
 /* GitHub image base URL */
 var IMG_BASE = "https://raw.githubusercontent.com/custodiaprojects/foodroutechristmas/main/";
 
@@ -900,6 +903,9 @@ function submitOrder() {
     document.getElementById("successOverlay").classList.add("open");
     btn.disabled = false;
     btn.innerHTML = "Submit Pre-Order &rarr;";
+    
+    /* Post order to Google Sheet (fire-and-forget — won't block the user) */
+    postToSheet(data, t);
   }
 
   if (EMAILJS_READY) {
@@ -932,6 +938,42 @@ function openMailtoFallback(d, summary) {
     + "&body=" + encodeURIComponent(body);
   /* Use setTimeout to keep modal flow smooth */
   setTimeout(function() { window.location.href = url; }, 200);
+}
+
+/* ── ACTION BUTTONS ── */
+/* ── POST ORDER TO GOOGLE SHEET ── */
+function postToSheet(data, t) {
+  if (!SHEET_WEBHOOK_URL || SHEET_WEBHOOK_URL.indexOf("YOUR_") === 0) return;
+  
+  var payload = {
+    company:    data.company,
+    contact:    data.contact,
+    email:      data.email,
+    phone:      data.phone,
+    city:       data.city,
+    address:    data.address,
+    postcode:   data.postcode,
+    notes:      data.notes,
+    subtotal:   t.total,
+    totalItems: t.items,
+    p1: qty.p1 || 0,
+    p2: qty.p2 || 0,
+    p3: qty.p3 || 0,
+    p4: qty.p4 || 0,
+    p5: qty.p5 || 0,
+    p6: qty.p6 || 0,
+    p7: qty.p7 || 0,
+    p8: qty.p8 || 0,
+  };
+  
+  fetch(SHEET_WEBHOOK_URL, {
+    method: "POST",
+    mode: "no-cors",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+  }).catch(function(err) {
+    console.warn("Sheet post failed (order still submitted):", err);
+  });
 }
 
 /* ── ACTION BUTTONS ── */
